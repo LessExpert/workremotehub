@@ -3,13 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 
 export async function getStaticPaths() {
-  // Use import.meta.glob (Vite-native) instead of Astro.glob
-  // This handles the empty-content-directory case gracefully
-  const articleModules = import.meta.glob("../../content/articles/*.mdx", {
-    eager: false,
-  });
-
-  const paths: Array<{ params: { slug: string }; props: { tag: string } }> = [];
+  const articleModules = import.meta.glob("../../content/articles/*.mdx", { eager: false });
   const tagSet = new Set<string>();
 
   for (const _path of Object.keys(articleModules)) {
@@ -19,9 +13,7 @@ export async function getStaticPaths() {
       for (const t of tags) {
         tagSet.add(t);
       }
-    } catch {
-      // skip invalid modules
-    }
+    } catch { /* skip */ }
   }
 
   return Array.from(tagSet).map((tag) => ({
@@ -30,26 +22,11 @@ export async function getStaticPaths() {
   }));
 }
 
-const { slug } = Astro.params;
 const { tag } = Astro.props;
 
-const allModules = import.meta.glob("../../content/articles/*.mdx", {
-  eager: true,
-});
+const allModules = import.meta.glob("../../content/articles/*.mdx", { eager: true });
 
-const filtered: Array<{
-  frontmatter: {
-    title: string;
-    slug: string;
-    description: string;
-    pubDate: string;
-    tags: string[];
-    wordCount: number;
-    draft: boolean;
-  };
-  Content: any;
-}> = [];
-
+const filtered: Array<any> = [];
 for (const [_, mod] of Object.entries(allModules)) {
   const m = mod as any;
   if (m.frontmatter && !m.frontmatter.draft && m.frontmatter.tags?.includes(tag)) {
@@ -63,23 +40,20 @@ filtered.sort(
     new Date(a.frontmatter.pubDate).getTime()
 );
 
-const displayName = tag
-  ? tag.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
-  : slug
-    ? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
-    : "";
+const displayName = tag.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+const totalWords = filtered.reduce((s, a) => s + (a.frontmatter.wordCount || 0), 0);
 ---
 
 <BaseLayout title={displayName} description={`Articles about ${displayName} for remote workers`}>
-  <div class="container" style="padding-top: 2rem;">
-    <div class="category-heading">
+  <div class="container category-page">
+    <div class="category-header">
       <h1>{displayName}</h1>
-      <p>{filtered.length} article{filtered.length !== 1 ? "s" : ""}</p>
+      <p>{filtered.length} article{filtered.length !== 1 ? "s" : ""} · {totalWords.toLocaleString()} total words</p>
     </div>
 
-    <div class="article-grid">
-      {filtered.length > 0 ? (
-        filtered.map((article) => (
+    {filtered.length > 0 ? (
+      <div class="article-grid">
+        {filtered.map((article) => (
           <ArticleCard
             title={article.frontmatter.title}
             slug={article.frontmatter.slug}
@@ -87,13 +61,15 @@ const displayName = tag
             pubDate={article.frontmatter.pubDate}
             tags={article.frontmatter.tags}
             wordCount={article.frontmatter.wordCount}
+            contentType={article.frontmatter.contentType}
           />
-        ))
-      ) : (
-        <p style="text-align: center; color: var(--color-text-muted); padding: 3rem 0;">
-          No articles in this category yet. Check back soon.
-        </p>
-      )}
-    </div>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <h3>No articles in this category yet</h3>
+        <p>Check back soon — we're adding new content every week.</p>
+      </div>
+    )}
   </div>
 </BaseLayout>

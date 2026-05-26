@@ -5,10 +5,21 @@ import { SITE, NAV } from "../config";
 <header class="site-header">
   <div class="container">
     <a href="/" class="site-logo">{SITE.title}</a>
+
     <nav class="nav">
       {NAV.map((item) => (
         <a href={item.href}>{item.label}</a>
       ))}
     </nav>
+
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div class="search-bar">
+        <span style="color:var(--gray-400); font-size:0.85rem;">⌕</span>
+        <input type="text" placeholder="Search articles..." aria-label="Search" />
+      </div>
+      <button class="mobile-menu-btn" style="background:none;border:none;font-size:1.5rem;color:var(--gray-600);cursor:pointer;" aria-label="Menu">
+        ☰
+      </button>
+    </div>
   </div>
 </header>

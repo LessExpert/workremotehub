@@ -3,8 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 import { SITE } from "../config";
 
-// Use import.meta.glob (Vite-native) instead of Astro.glob
-// Avoids AstroGlobNoMatch error when content directory is empty
 const articleModules = import.meta.glob("../content/articles/*.mdx", { eager: true });
 
 const sorted: Array<{
@@ -15,6 +13,7 @@ const sorted: Array<{
     pubDate: string;
     tags: string[];
     wordCount: number;
+    contentType: string;
     draft: boolean;
   };
 }> = [];
@@ -31,22 +30,63 @@ sorted.sort(
     new Date(b.frontmatter.pubDate).getTime() -
     new Date(a.frontmatter.pubDate).getTime()
 );
+
+// Group by content type for stats
+const contentTypes = new Set(sorted.map(a => a.frontmatter.contentType).filter(Boolean));
+const totalWords = sorted.reduce((sum, a) => sum + (a.frontmatter.wordCount || 0), 0);
 ---
 
 <BaseLayout title="Home" description={SITE.description}>
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
     <div class="container">
+      <div class="hero-badge">
+        <span></span> Trusted Reviews for Remote Workers
+      </div>
       <h1>{SITE.title}</h1>
-      <p>{SITE.tagline}</p>
+      <p>{SITE.tagline}. We test the gear so you don't have to.</p>
+      <a href="/categories/home-office-setup" class="hero-cta">
+        Browse Reviews →
+      </a>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">{sorted.length}</div>
+          <div class="hero-stat-label">Articles Published</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">{totalWords.toLocaleString()}</div>
+          <div class="hero-stat-label">Words Written</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">{contentTypes.size}</div>
+          <div class="hero-stat-label">Content Types</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Article list -->
-  <div class="container">
-    <div class="article-grid">
-      {sorted.length > 0 ? (
-        sorted.map((article) => (
+  <!-- Content -->
+  <div class="container" style="padding: 2rem 0;">
+    <!-- Category Pills -->
+    <div class="category-pills">
+      <a href="/categories/home-office-setup" class="category-pill">🏠 Home Office Setup</a>
+      <a href="/categories/productivity" class="category-pill">⚡ Productivity</a>
+      <a href="/categories/digital-nomad" class="category-pill">🌍 Digital Nomad</a>
+      <a href="/categories/remote" class="category-pill">💻 Remote Work</a>
+      <a href="/" class="category-pill" style="background:var(--brand-600);color:var(--white);border-color:var(--brand-600);">All Articles</a>
+    </div>
+
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2>Latest Reviews & Guides</h2>
+      <a href="/rss.xml">RSS Feed ↗</a>
+    </div>
+
+    <!-- Article Grid -->
+    {sorted.length > 0 ? (
+      <div class="article-grid">
+        {sorted.map((article) => (
           <ArticleCard
             title={article.frontmatter.title}
             slug={article.frontmatter.slug}
@@ -54,13 +94,27 @@ sorted.sort(
             pubDate={article.frontmatter.pubDate}
             tags={article.frontmatter.tags}
             wordCount={article.frontmatter.wordCount}
+            contentType={article.frontmatter.contentType}
           />
-        ))
-      ) : (
-        <p style="text-align: center; color: var(--color-text-muted); padding: 3rem 0;">
-          No articles yet. Run the content pipeline to generate your first batch.
-        </p>
-      )}
-    </div>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <h3>No articles yet</h3>
+        <p>Run the content pipeline to generate your first batch of articles.</p>
+      </div>
+    )}
+
+    <!-- Newsletter Signup -->
+    {sorted.length > 0 && (
+      <div class="newsletter-box">
+        <h3>📬 Stay Updated</h3>
+        <p>Get the latest remote work gear reviews and productivity tips delivered to your inbox.</p>
+        <form class="newsletter-form" action="#" method="post">
+          <input type="email" placeholder="your@email.com" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    )}
   </div>
 </BaseLayout>

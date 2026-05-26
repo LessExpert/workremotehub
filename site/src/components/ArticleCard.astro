@@ -6,30 +6,50 @@ export interface Props {
   pubDate?: string;
   tags?: string[];
   wordCount?: number;
+  contentType?: string;
 }
 
-const { title, slug, excerpt, pubDate, tags = [], wordCount } = Astro.props;
+const { title, slug, excerpt, pubDate, tags = [], wordCount, contentType } = Astro.props;
+
+// Content type icons
+const typeIcons: Record<string, string> = {
+  roundup: "⭐",
+  comparison: "⚖️",
+  guide: "📖",
+  listicle: "📋",
+  review: "🔍",
+};
+
+const typeIcon = typeIcons[contentType || ""] || "📄";
+const readingTime = wordCount ? Math.max(1, Math.ceil(wordCount / 200)) + " min read" : "";
 ---
 
 <article class="article-card">
-  <h2>
-    <a href={`/${slug}/`}>{title}</a>
-  </h2>
-
-  {pubDate && (
-    <div class="meta">
-      <time datetime={pubDate}>{pubDate}</time>
-      {wordCount && <span> · {wordCount} words</span>}
+  <a href={`/${slug}/`} style="text-decoration:none;color:inherit;">
+    <div class="article-card-image">
+      {typeIcon}
     </div>
-  )}
-
-  {excerpt && <p class="excerpt">{excerpt}</p>}
-
-  {tags.length > 0 && (
-    <div class="tags">
-      {tags.map((tag) => (
-        <a href={`/categories/${tag}`} class="tag">{tag}</a>
-      ))}
+  </a>
+  <div class="article-card-body">
+    <div class="card-meta">
+      <span class="card-meta-badge">{contentType || "article"}</span>
+      {pubDate && <span>{pubDate}</span>}
+      {readingTime && <span>{readingTime}</span>}
     </div>
-  )}
+
+    <h2>
+      <a href={`/${slug}/`}>{title}</a>
+    </h2>
+
+    {excerpt && <p class="excerpt">{excerpt}</p>}
+
+    {tags.length > 0 && (
+      <div class="tags">
+        {tags.slice(0, 4).map((tag) => (
+          <a href={`/categories/${tag}`} class="tag">{tag}</a>
+        ))}
+        {tags.length > 4 && <span class="tag">+{tags.length - 4}</span>}
+      </div>
+    )}
+  </div>
 </article>

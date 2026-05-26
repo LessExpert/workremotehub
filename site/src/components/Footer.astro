@@ -4,19 +4,44 @@ import { SITE } from "../config";
 
 <footer class="site-footer">
   <div class="container">
-    <p>
-      &copy; {new Date().getFullYear()} {SITE.title}. All rights reserved.
-    </p>
-    <p style="margin-top: 0.5rem;">
-      <a href="/">Home</a>
-      {" · "}
-      <a href="/about">About</a>
-      {" · "}
-      <a href="/rss.xml">RSS Feed</a>
-    </p>
-    <p style="margin-top: 0.5rem; font-size: 0.8rem;">
-      Some links on this site are affiliate links. We may earn a commission
-      if you make a purchase through these links, at no extra cost to you.
-    </p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>{SITE.title}</h3>
+        <p>{SITE.tagline}. We provide honest reviews and practical guides for remote workers and digital nomads looking to optimize their home office setup.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Content</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/categories/home-office-setup">Home Office Setup</a></li>
+          <li><a href="/categories/productivity">Productivity</a></li>
+          <li><a href="/categories/digital-nomad">Digital Nomad</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/rss.xml">RSS Feed</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/about">Affiliate Disclosure</a></li>
+          <li><a href="/about">Privacy Policy</a></li>
+          <li><a href="/about">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; {new Date().getFullYear()} {SITE.title}. All rights reserved.</span>
+      <span>Some links on this site are affiliate links. We may earn a commission at no extra cost to you.</span>
+    </div>
   </div>
 </footer>
