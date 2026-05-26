@@ -18,7 +18,7 @@ export const SOCIAL = {
   twitter: "@remoteworkhub", // Optional
 };
 
-export const AMAZON_TAG = "remotework-20"; // Your Amazon affiliate tag (change after signup)
+export const AMAZON_TAG = ""; // Not using Amazon Associates
 
 export const NAV = [
   { label: "Home", href: "/" },

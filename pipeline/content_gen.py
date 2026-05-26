@@ -261,10 +261,9 @@ GENERATORS = {
 
 def extract_affiliate_candidates(content: str) -> list:
     """
-    Heuristically extract product names from content that could be
-    linked to Amazon affiliate URLs.
+    Extract product names mentioned in content for reference links.
+    No Amazon affiliate links — uses Google Shopping for product discovery.
     """
-    # Known product patterns: specific brand + product names
     product_patterns = [
         r'(?:the\s+)?([A-Z][a-zA-Z0-9\s]+(?:Headphones|Monitor|Chair|Desk|Keyboard|Mouse|Webcam|Microphone|Lamp|Light|Stand|Hub|Speaker|Backpack|Bag|Case|Mat|Pad|Screen|Camera|Cable|Charger|Adapter|Router|Extender))',
         r'([A-Z][a-zA-Z0-9]+(?:\s+[A-Z][a-zA-Z0-9]+){1,3})\s+(?:is|has|comes|offers|features|costs|prices?|retails)',
@@ -278,7 +277,8 @@ def extract_affiliate_candidates(content: str) -> list:
             if len(product) > 5 and len(product) < 80:
                 candidates.add(product)
 
-    return [{"text": p, "url": f"https://www.amazon.com/s?k={urllib.parse.quote(p)}&tag={CONFIG['site']['monetization']['amazon_tag']}"}
+    # Google Shopping links instead of Amazon
+    return [{"text": p, "url": f"https://www.google.com/search?tbm=shop&q={urllib.parse.quote(p)}"}
             for p in sorted(candidates)[:8]]
 
 

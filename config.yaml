@@ -19,15 +19,8 @@ site:
     audience: "remote workers, freelancers, digital nomads, hybrid employees"
 
   monetization:
-    amazon_tag: "remotework-20"          # Your Amazon affiliate tag
     affiliate_programs:
-      - name: "Amazon Associates"
-        enabled: true
-        tag_var: "tag"
-      - name: "Impact Radius / CJ"       # For SaaS affiliates
-        enabled: false
-      - name: "Direct SaaS"             # Notion, Zapier, etc.
-        enabled: false
+      - name: "SaaS Affiliates"
 
 pipeline:
   # Content generation schedule

@@ -33,20 +33,6 @@ class AffiliateProgram:
 # ── Program definitions ────────────────────────────────────────────
 
 PROGRAMS = [
-    # ── Tier 1: Physical Products ────────────────────────────────
-    AffiliateProgram(
-        slug="amazon",
-        name="Amazon Associates",
-        url_template="https://www.amazon.com/dp/{asin}?tag={tag}",
-        commission="4-10% per sale",
-        payout_method="Gift card, direct deposit, or check",
-        payout_threshold="$10 (direct deposit), $100 (check)",
-        cookie_duration="24 hours",
-        signup_url="https://affiliate-program.amazon.com/",
-        status="pending",
-        affiliate_id="",  # ← CHANGE after signup
-    ),
-
     # ── Tier 2: SaaS (Recurring revenue) ─────────────────────────
 
     AffiliateProgram(
