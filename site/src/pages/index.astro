@@ -110,10 +110,15 @@ const totalWords = sorted.reduce((sum, a) => sum + (a.frontmatter.wordCount || 0
       <div class="newsletter-box">
         <h3>📬 Stay Updated</h3>
         <p>Get the latest remote work gear reviews and productivity tips delivered to your inbox.</p>
-        <form class="newsletter-form" action="#" method="post">
-          <input type="email" placeholder="your@email.com" required />
-          <button type="submit">Subscribe</button>
-        </form>
+        <form
+        action="https://buttondown.com/api/emails/embed-subscribe/workremotehub"
+        method="post"
+        target="popupwindow"
+        class="newsletter-form"
+      >
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe</button>
+      </form>
       </div>
     )}
   </div>
