@@ -185,11 +185,18 @@ def article_to_mdx(article: dict, internal_links: list = None) -> str:
     except (json.JSONDecodeError, TypeError):
         pass
 
-    # Build tags from article slug + title keywords
-    tags = []
-    for w in slug.replace("-", " ").split():
-        if len(w) > 3 and w not in ("with", "that", "this", "your"):
-            tags.append(w[:20])
+    # Build tags from config-defined topic clusters + content match
+    # This ensures categories like "home-office-setup" actually exist
+    cluster_tags = []
+    title_lower = title.lower()
+    for cluster in CONFIG["pipeline"]["keywords"]["clusters"]:
+        cluster_name = cluster["name"]
+        cluster_kws = cluster.get("keywords", [])
+        # Check if any cluster keyword appears in title or slug
+        if any(kw in title_lower or kw in slug.replace("-", " ") for kw in cluster_kws):
+            cluster_tags.append(cluster_name)
+    # Also add content_type as a tag
+    tags = cluster_tags + [article.get("content_type", "guide")]
     # Dedupe
     tags = list(dict.fromkeys(tags))[:5]
 

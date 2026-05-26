@@ -3,9 +3,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 
 export async function getStaticPaths() {
+  // Predefined clusters from config — ensures these pages never 404
+  const PREDEFINED_CATEGORIES = [
+    "home-office-setup", "remote-work-tools", "productivity", "digital-nomad"
+  ];
+
   const articleModules = import.meta.glob("../../content/articles/*.mdx", { eager: false });
   const tagSet = new Set<string>();
 
+  // Add predefined categories
+  for (const cat of PREDEFINED_CATEGORIES) {
+    tagSet.add(cat);
+  }
+
+  // Add tags from articles
   for (const _path of Object.keys(articleModules)) {
     try {
       const mod = await articleModules[_path]() as any;
@@ -48,7 +59,7 @@ const totalWords = filtered.reduce((s, a) => s + (a.frontmatter.wordCount || 0),
   <div class="container category-page">
     <div class="category-header">
       <h1>{displayName}</h1>
-      <p>{filtered.length} article{filtered.length !== 1 ? "s" : ""} · {totalWords.toLocaleString()} total words</p>
+      <p>{filtered.length > 0 ? `${filtered.length} article${filtered.length !== 1 ? "s" : ""} · ${totalWords.toLocaleString()} total words` : "No articles yet — check back soon"}</p>
     </div>
 
     {filtered.length > 0 ? (
@@ -67,8 +78,9 @@ const totalWords = filtered.reduce((s, a) => s + (a.frontmatter.wordCount || 0),
       </div>
     ) : (
       <div class="empty-state">
-        <h3>No articles in this category yet</h3>
-        <p>Check back soon — we're adding new content every week.</p>
+        <h3>📭 No articles in this category yet</h3>
+        <p>We're working on it! The content pipeline generates {displayName} articles automatically every week. Check back soon.</p>
+        <a href="/" style="display:inline-block; margin-top:1rem; padding:0.5rem 1.25rem; background:var(--brand-600); color:white; border-radius:8px; font-weight:600;">Browse All Articles →</a>
       </div>
     )}
   </div>
