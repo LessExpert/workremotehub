@@ -25,5 +25,6 @@ export const NAV = [
   { label: "Home Office Setup", href: "/categories/home-office-setup" },
   { label: "Productivity", href: "/categories/productivity" },
   { label: "Digital Nomad", href: "/categories/digital-nomad" },
+  { label: "Products", href: "/products" },
   { label: "About", href: "/about" },
 ];
