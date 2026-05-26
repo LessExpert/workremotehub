@@ -1,5 +1,8 @@
 
 export default new Map([
 ["src/content/articles/best-backpack-for-laptop-commute-vs-which-is-better-for-remote-work.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Farticles%2Fbest-backpack-for-laptop-commute-vs-which-is-better-for-remote-work.mdx&astroContentModuleFlag=true")],
+["src/content/articles/best-standing-desk-converter-review-in-2025-honest-reviews-for-remote-workers.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Farticles%2Fbest-standing-desk-converter-review-in-2025-honest-reviews-for-remote-workers.mdx&astroContentModuleFlag=true")],
+["src/content/articles/best-mouse-for-ergonomics-vs-which-is-better-for-remote-work.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Farticles%2Fbest-mouse-for-ergonomics-vs-which-is-better-for-remote-work.mdx&astroContentModuleFlag=true")],
+["src/content/articles/laptop-stand-for-desk-vs-which-is-better-for-remote-work.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Farticles%2Flaptop-stand-for-desk-vs-which-is-better-for-remote-work.mdx&astroContentModuleFlag=true")],
 ["src/content/articles/best-webcam-for-remote-meetings-vs-which-is-better-for-remote-work.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Farticles%2Fbest-webcam-for-remote-meetings-vs-which-is-better-for-remote-work.mdx&astroContentModuleFlag=true")]]);
 		

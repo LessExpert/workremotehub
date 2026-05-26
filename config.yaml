@@ -35,7 +35,7 @@ pipeline:
     model: "tinyllama:latest"            # faster than llama3.2 for CPU
     endpoint: "http://localhost:11434"
     temperature: 0.7
-    max_tokens: 2000
+    max_tokens: 1000
 
   # Keyword sources
   keywords:
