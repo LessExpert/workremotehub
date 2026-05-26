@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import AdPlaceholder from "../components/AdPlaceholder.astro";
 
 export interface Props {
   title: string;
@@ -60,9 +61,12 @@ const {
       <slot />
     </div>
 
+    <!-- In-content ad placeholder (after article text, before disclosure) -->
+    <AdPlaceholder position="after-content" />
+
     {affiliateLinks.length > 0 && (
       <div class="affiliate-disclosure">
-        <p><strong>Products mentioned:</strong></p>
+        <p><strong>Products mentioned in this article:</strong></p>
         <ul>
           {affiliateLinks.map((link) => (
             <li>

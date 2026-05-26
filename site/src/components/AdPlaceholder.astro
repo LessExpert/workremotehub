@@ -1,0 +1,75 @@
+---
+/**
+ * Ad Placement Component — shows placeholders now, real ads later.
+ *
+ * When you reach ad-network traffic thresholds, swap the placeholder
+ * div for your actual ad script (Ezoic, Mediavine, etc.).
+ *
+ * Traffic requirements:
+ *   Ezoic:     ~10k monthly visitors
+ *   Mediavine: ~50k sessions/month
+ *   AdSense:   No minimum (but low RPM)
+ */
+
+export interface Props {
+  position: "in-article" | "sidebar" | "after-content";
+  /** For in-article: after which paragraph number */
+  afterParagraph?: number;
+}
+
+const { position, afterParagraph = 3 } = Astro.props;
+
+// ── Ad unit IDs (configurable later) ──
+const AD_CLIENT = "";    // e.g., "ca-pub-XXXXXXXXXXXXXXXX"
+const AD_SLOT_IN_ARTICLE = "";  // e.g., "1234567890"
+const AD_SLOT_AFTER_CONTENT = "";
+---
+
+{AD_CLIENT ? (
+  // ── Real ad code (enable when approved) ──
+  position === "in-article" && (
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={AD_CLIENT}
+      data-ad-slot={AD_SLOT_IN_ARTICLE}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+  ) ||
+  position === "after-content" && (
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={AD_CLIENT}
+      data-ad-slot={AD_SLOT_AFTER_CONTENT}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+  )
+) : (
+  // ── Placeholder (shown until you hit traffic thresholds) ──
+  <div
+    style="
+      background: var(--color-bg-alt);
+      border: 2px dashed var(--color-border);
+      border-radius: 8px;
+      padding: 2rem 1rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    "
+  >
+    <p style="font-weight: 600; margin-bottom: 0.3rem;">
+      {position === "in-article" ? "🔗 Products mentioned above" : "📢 Advertisement"}
+    </p>
+    <p>
+      This space reserved for ads once the site reaches traffic thresholds.
+      <br/>
+      <span style="font-size: 0.8rem;">
+        (<strong>Coming after traffic milestone:</strong> 10k monthly visitors for Ezoic)
+      </span>
+    </p>
+  </div>
+)}
