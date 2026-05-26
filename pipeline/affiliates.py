@@ -36,19 +36,6 @@ PROGRAMS = [
     # ── Tier 2: SaaS (Recurring revenue) ─────────────────────────
 
     AffiliateProgram(
-        slug="notion",
-        name="Notion",
-        url_template="https://www.notion.so/?ref={id}",
-        commission="$10/mo per referral or 20% first year",
-        payout_method="PayPal",
-        payout_threshold="$50",
-        cookie_duration="30 days",
-        signup_url="https://www.notion.so/affiliates",
-        status="pending",
-        affiliate_id="",
-    ),
-
-    AffiliateProgram(
         slug="zapier",
         name="Zapier",
         url_template="https://zapier.com/?ref={id}",
