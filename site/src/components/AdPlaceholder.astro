@@ -1,14 +1,13 @@
 ---
 /**
- * Ad Placement Component — shows placeholders now, real ads later.
+ * Ad Placement Component
  *
- * When you reach ad-network traffic thresholds, swap the placeholder
- * div for your actual ad script (Ezoic, Mediavine, etc.).
- *
- * Traffic requirements:
- *   Ezoic:     ~10k monthly visitors
- *   Mediavine: ~50k sessions/month
- *   AdSense:   No minimum (but low RPM)
+ * Google AdSense is loaded globally in BaseLayout.astro.
+ * If Auto Ads is enabled in your AdSense dashboard, Google
+ * automatically places ads without needing manual ad units.
+ * 
+ * This component shows an in-article ad placeholder when
+ * auto ads aren't yet active.
  */
 
 export interface Props {
@@ -19,36 +18,27 @@ export interface Props {
 
 const { position, afterParagraph = 3 } = Astro.props;
 
-// ── Ad unit IDs (configurable later) ──
-const AD_CLIENT = "";    // e.g., "ca-pub-XXXXXXXXXXXXXXXX"
-const AD_SLOT_IN_ARTICLE = "";  // e.g., "1234567890"
-const AD_SLOT_AFTER_CONTENT = "";
+// ── Google AdSense publisher ID ──
+const PUBLISHER_ID = "ca-pub-1687318913855124";
+const ADS_ENABLED = true;  // Set to false to show placeholder again
 ---
 
-{AD_CLIENT ? (
-  // ── Real ad code (enable when approved) ──
-  position === "in-article" && (
+{ADS_ENABLED ? (
+  // Auto ads handles everything — Google scans the page and places ads
+  // No manual ad units needed if Auto Ads is on in your AdSense dashboard
+  <div style="margin: 1.5rem 0;">
     <ins
       class="adsbygoogle"
-      style="display:block"
-      data-ad-client={AD_CLIENT}
-      data-ad-slot={AD_SLOT_IN_ARTICLE}
-      data-ad-format="auto"
-      data-full-width-responsive="true"
+      style="display:block; text-align:center;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client={PUBLISHER_ID}
+      data-ad-slot=""
     ></ins>
-  ) ||
-  position === "after-content" && (
-    <ins
-      class="adsbygoogle"
-      style="display:block"
-      data-ad-client={AD_CLIENT}
-      data-ad-slot={AD_SLOT_AFTER_CONTENT}
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-    ></ins>
-  )
+    <script set:html="(adsbygoogle = window.adsbygoogle || []).push({})"></script>
+  </div>
 ) : (
-  // ── Placeholder (shown until you hit traffic thresholds) ──
+  // ── Placeholder (shown while AdSense isn't active) ──
   <div
     style="
       background: var(--color-bg-alt);
@@ -61,15 +51,7 @@ const AD_SLOT_AFTER_CONTENT = "";
       color: var(--color-text-muted);
     "
   >
-    <p style="font-weight: 600; margin-bottom: 0.3rem;">
-      {position === "in-article" ? "🔗 Products mentioned above" : "📢 Advertisement"}
-    </p>
-    <p>
-      This space reserved for ads once the site reaches traffic thresholds.
-      <br/>
-      <span style="font-size: 0.8rem;">
-        (<strong>Coming after traffic milestone:</strong> 10k monthly visitors for Ezoic)
-      </span>
-    </p>
+    <p style="font-weight: 600; margin-bottom: 0.3rem;">📢 Advertisement</p>
+    <p>This space reserved for ads once the site reaches traffic thresholds.</p>
   </div>
 )}
