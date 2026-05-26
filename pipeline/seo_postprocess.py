@@ -197,7 +197,6 @@ def article_to_mdx(article: dict, internal_links: list = None) -> str:
         "title": title,
         "description": excerpt[:200],
         "pubDate": published[:10],
-        "slug": slug,
         "contentType": content_type,
         "wordCount": word_count,
         "tags": tags,

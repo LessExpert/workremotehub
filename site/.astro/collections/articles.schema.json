@@ -13,9 +13,6 @@
         "pubDate": {
           "type": "string"
         },
-        "slug": {
-          "type": "string"
-        },
         "contentType": {
           "type": "string"
         },
@@ -59,8 +56,7 @@
       "required": [
         "title",
         "description",
-        "pubDate",
-        "slug"
+        "pubDate"
       ],
       "additionalProperties": false
     }

@@ -36,6 +36,7 @@ LLM_MODEL = CONFIG["pipeline"]["llm"]["model"]
 LLM_TEMP = CONFIG["pipeline"]["llm"]["temperature"]
 LLM_MAX_TOKENS = CONFIG["pipeline"]["llm"]["max_tokens"]
 SITE_CONFIG = CONFIG["site"]
+SEO_CONFIG = CONFIG["seo"]
 PERSONA = SITE_CONFIG["persona"]
 
 
@@ -136,8 +137,8 @@ Structure:
 3. Quick comparison table summary
 4. Final verdict paragraph with personalized recommendation
 
-Make each product recommendation detailed and specific (200-300 words each).
-Total article should be 1500-2000 words.
+Make each product recommendation detailed and specific (100-150 words each).
+Total article should be 800-1200 words.
 
 Return ONLY the body text in plain paragraphs. No title, no formatting markers."""
 
@@ -178,7 +179,7 @@ Structure:
    - "Best overall"
 5. Final verdict
 
-Total article: 1500-2000 words. Return ONLY the body text."""
+Total article: 800-1200 words. Return ONLY the body text."""
 
     content = call_llm(prompt)
     if not content:
@@ -206,7 +207,7 @@ Structure:
 6. Final thoughts
 
 Make it practical and actionable — the reader should be able to follow along.
-Total: 1200-1800 words. Return ONLY the body text."""
+Total: 600-1000 words. Return ONLY the body text."""
 
     content = call_llm(prompt)
     if not content:
@@ -343,7 +344,7 @@ def run_content_generation(batch_size: int = None):
             content=content,
             content_type=content_type,
             excerpt=excerpt[:300] if excerpt else "",
-            meta_description=SITE_CONFIG["seo"]["description_template"].format(keyword=keyword),
+            meta_description=SEO_CONFIG["description_template"].format(keyword=keyword),
             word_count=word_count,
             schema_json=json.dumps({
                 "@context": "https://schema.org",

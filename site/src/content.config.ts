@@ -6,7 +6,6 @@ const articlesCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.string(),
-    slug: z.string(),
     contentType: z.string().optional(),
     wordCount: z.number().optional(),
     tags: z.array(z.string()).optional(),
