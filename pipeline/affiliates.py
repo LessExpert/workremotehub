@@ -44,7 +44,7 @@ PROGRAMS = [
         cookie_duration="24 hours",
         signup_url="https://affiliate-program.amazon.com/",
         status="pending",
-        affiliate_id="remotework-20",  # ← CHANGE after signup
+        affiliate_id="",  # ← CHANGE after signup
     ),
 
     # ── Tier 2: SaaS (Recurring revenue) ─────────────────────────
@@ -201,7 +201,7 @@ def amazon_link(asin: str, tag: Optional[str] = None) -> str:
     program = [p for p in PROGRAMS if p.slug == "amazon"][0]
     t = tag or program.affiliate_id
     if not t:
-        t = "remotework-20"  # fallback placeholder
+        t = ""  # fallback placeholder
     return f"https://www.amazon.com/dp/{asin}?tag={t}"
 
 
@@ -210,7 +210,7 @@ def amazon_search_link(query: str, tag: Optional[str] = None) -> str:
     program = [p for p in PROGRAMS if p.slug == "amazon"][0]
     t = tag or program.affiliate_id
     if not t:
-        t = "remotework-20"
+        t = ""
     from urllib.parse import quote
     return f"https://www.amazon.com/s?k={quote(query)}&tag={t}"
 
