@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import { SITE } from "../config";
+
+// Use import.meta.glob (Vite-native) instead of Astro.glob
+// Avoids AstroGlobNoMatch error when content directory is empty
+const articleModules = import.meta.glob("../content/articles/*.mdx", { eager: true });
+
+const sorted: Array<{
+  frontmatter: {
+    title: string;
+    slug: string;
+    description: string;
+    pubDate: string;
+    tags: string[];
+    wordCount: number;
+    draft: boolean;
+  };
+}> = [];
+
+for (const [_, mod] of Object.entries(articleModules)) {
+  const m = mod as any;
+  if (m.frontmatter && !m.frontmatter.draft) {
+    sorted.push(m);
+  }
+}
+
+sorted.sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).getTime() -
+    new Date(a.frontmatter.pubDate).getTime()
+);
+---
+
+<BaseLayout title="Home" description={SITE.description}>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>{SITE.title}</h1>
+      <p>{SITE.tagline}</p>
+    </div>
+  </section>
+
+  <!-- Article list -->
+  <div class="container">
+    <div class="article-grid">
+      {sorted.length > 0 ? (
+        sorted.map((article) => (
+          <ArticleCard
+            title={article.frontmatter.title}
+            slug={article.frontmatter.slug}
+            excerpt={article.frontmatter.description}
+            pubDate={article.frontmatter.pubDate}
+            tags={article.frontmatter.tags}
+            wordCount={article.frontmatter.wordCount}
+          />
+        ))
+      ) : (
+        <p style="text-align: center; color: var(--color-text-muted); padding: 3rem 0;">
+          No articles yet. Run the content pipeline to generate your first batch.
+        </p>
+      )}
+    </div>
+  </div>
+</BaseLayout>

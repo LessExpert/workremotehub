@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+
+export async function getStaticPaths() {
+  // Use import.meta.glob (Vite-native) instead of Astro.glob
+  // This handles the empty-content-directory case gracefully
+  const articleModules = import.meta.glob("../../content/articles/*.mdx", {
+    eager: false,
+  });
+
+  const paths: Array<{ params: { slug: string }; props: { tag: string } }> = [];
+  const tagSet = new Set<string>();
+
+  for (const _path of Object.keys(articleModules)) {
+    try {
+      const mod = await articleModules[_path]() as any;
+      const tags = mod.frontmatter?.tags || [];
+      for (const t of tags) {
+        tagSet.add(t);
+      }
+    } catch {
+      // skip invalid modules
+    }
+  }
+
+  return Array.from(tagSet).map((tag) => ({
+    params: { slug: tag },
+    props: { tag },
+  }));
+}
+
+const { slug } = Astro.params;
+const { tag } = Astro.props;
+
+const allModules = import.meta.glob("../../content/articles/*.mdx", {
+  eager: true,
+});
+
+const filtered: Array<{
+  frontmatter: {
+    title: string;
+    slug: string;
+    description: string;
+    pubDate: string;
+    tags: string[];
+    wordCount: number;
+    draft: boolean;
+  };
+  Content: any;
+}> = [];
+
+for (const [_, mod] of Object.entries(allModules)) {
+  const m = mod as any;
+  if (m.frontmatter && !m.frontmatter.draft && m.frontmatter.tags?.includes(tag)) {
+    filtered.push(m);
+  }
+}
+
+filtered.sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).getTime() -
+    new Date(a.frontmatter.pubDate).getTime()
+);
+
+const displayName = tag
+  ? tag.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  : slug
+    ? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : "";
+---
+
+<BaseLayout title={displayName} description={`Articles about ${displayName} for remote workers`}>
+  <div class="container" style="padding-top: 2rem;">
+    <div class="category-heading">
+      <h1>{displayName}</h1>
+      <p>{filtered.length} article{filtered.length !== 1 ? "s" : ""}</p>
+    </div>
+
+    <div class="article-grid">
+      {filtered.length > 0 ? (
+        filtered.map((article) => (
+          <ArticleCard
+            title={article.frontmatter.title}
+            slug={article.frontmatter.slug}
+            excerpt={article.frontmatter.description}
+            pubDate={article.frontmatter.pubDate}
+            tags={article.frontmatter.tags}
+            wordCount={article.frontmatter.wordCount}
+          />
+        ))
+      ) : (
+        <p style="text-align: center; color: var(--color-text-muted); padding: 3rem 0;">
+          No articles in this category yet. Check back soon.
+        </p>
+      )}
+    </div>
+  </div>
+</BaseLayout>

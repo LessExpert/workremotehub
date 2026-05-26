@@ -1,0 +1,14 @@
+---
+import { SITE, NAV } from "../config";
+---
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="site-logo">{SITE.title}</a>
+    <nav class="nav">
+      {NAV.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

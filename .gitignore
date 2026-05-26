@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Node
+site/node_modules/
+site/dist/
+
+# Database
+content.db
+content.db-wal
+content.db-shm
+
+# Logs
+*.log
+cron.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

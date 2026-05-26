@@ -1,0 +1,53 @@
+---
+// RSS Feed — renders /rss.xml
+import { SITE } from "../config";
+
+interface ArticleFrontmatter {
+  title: string;
+  slug: string;
+  description: string;
+  pubDate: string;
+  draft: boolean;
+}
+
+const articleModules = import.meta.glob("../content/articles/*.mdx", { eager: true });
+
+const sorted: Array<ArticleFrontmatter & { link: string }> = [];
+
+for (const [_, mod] of Object.entries(articleModules)) {
+  const m = mod as any;
+  if (m.frontmatter && !m.frontmatter.draft) {
+    sorted.push({
+      title: m.frontmatter.title,
+      pubDate: m.frontmatter.pubDate,
+      description: m.frontmatter.description,
+      link: `/${m.frontmatter.slug}/`,
+      slug: m.frontmatter.slug,
+      draft: false,
+    });
+  }
+}
+
+sorted.sort(
+  (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
+);
+---
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{SITE.title}</title>
+    <description>{SITE.description}</description>
+    <link>{SITE.url}</link>
+    <language>{SITE.language}</language>
+    <atom:link href={`${SITE.url}/rss.xml`} rel="self" type="application/rss+xml" />
+    {sorted.map((item) => (
+      <item>
+        <title>{item.title}</title>
+        <pubDate>{new Date(item.pubDate).toUTCString()}</pubDate>
+        <description>{item.description}</description>
+        <link>{`${SITE.url}${item.link}`}</link>
+        <guid>{`${SITE.url}${item.link}`}</guid>
+      </item>
+    ))}
+  </channel>
+</rss>

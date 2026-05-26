@@ -1,0 +1,19 @@
+---
+export interface Props {
+  text: string;
+  url: string;
+  rel?: string;
+}
+
+const { text, url, rel = "nofollow sponsored" } = Astro.props;
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel={rel}
+  class="affiliate-link"
+>
+  {text}
+  <span style="font-size: 0.8em; margin-left: 2px;">↗</span>
+</a>

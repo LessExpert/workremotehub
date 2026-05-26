@@ -1,0 +1,35 @@
+---
+export interface Props {
+  title: string;
+  slug: string;
+  excerpt?: string;
+  pubDate?: string;
+  tags?: string[];
+  wordCount?: number;
+}
+
+const { title, slug, excerpt, pubDate, tags = [], wordCount } = Astro.props;
+---
+
+<article class="article-card">
+  <h2>
+    <a href={`/${slug}/`}>{title}</a>
+  </h2>
+
+  {pubDate && (
+    <div class="meta">
+      <time datetime={pubDate}>{pubDate}</time>
+      {wordCount && <span> · {wordCount} words</span>}
+    </div>
+  )}
+
+  {excerpt && <p class="excerpt">{excerpt}</p>}
+
+  {tags.length > 0 && (
+    <div class="tags">
+      {tags.map((tag) => (
+        <a href={`/categories/${tag}`} class="tag">{tag}</a>
+      ))}
+    </div>
+  )}
+</article>
