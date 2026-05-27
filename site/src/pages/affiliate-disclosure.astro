@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config";
+---
+
+<BaseLayout title="Affiliate Disclosure" description={`Affiliate Disclosure for ${SITE.title}`}>
+  <div class="container" style="padding-top: 2rem; padding-bottom: 3rem; max-width: 780px;">
+    <h1>Affiliate Disclosure</h1>
+    <p style="color:var(--gray-500); font-size:0.9rem; margin-bottom:2rem;">
+      Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </p>
+
+    <h2>Our Commitment to Transparency</h2>
+    <p>
+      At {SITE.title}, transparency is a core value. We want you to understand exactly how this site makes money so you can evaluate our content with full context.
+    </p>
+
+    <h2>How We Earn Money</h2>
+    <p>
+      {SITE.title} participates in affiliate marketing programs. This means that when you click on some links on our site and make a purchase, we may receive a small commission — at no additional cost to you.
+    </p>
+
+    <h2>What is Affiliate Marketing?</h2>
+    <p>
+      Affiliate marketing is a common practice where a website earns a commission by promoting products or services. When we link to a product and you buy it, the retailer shares a small percentage of the sale with us as a "thank you" for the referral. The price you pay is exactly the same whether you use our link or go directly to the retailer.
+    </p>
+
+    <h2>Our Review Standards</h2>
+    <p>
+      Our editorial integrity is paramount. We have strict standards for every product we review and recommend:
+    </p>
+    <ul>
+      <li><strong>We only recommend products we've researched thoroughly.</strong> Every product featured on this site has been evaluated against real-world remote work needs.</li>
+      <li><strong>Commissions never influence our reviews.</strong> We do not accept payment for positive reviews, and we disclose both pros and cons honestly.</li>
+      <li><strong>Affiliate status doesn't affect product ranking.</strong> Products that pay higher commissions do not receive better placement or more favorable treatment.</li>
+      <li><strong>We disclose affiliate relationships on applicable pages.</strong> You'll see notices on pages that contain affiliate links.</li>
+    </ul>
+
+    <h2>Affiliate Programs We Participate In</h2>
+    <p>
+      We currently participate in the following affiliate programs:
+    </p>
+    <ul>
+      <li><strong>SaaS Affiliates</strong> — For software tools and platforms</li>
+      <li>Additional programs may be added over time. This page will be updated accordingly.</li>
+    </ul>
+    <p>
+      As an Amazon Associate, we may earn from qualifying purchases (if Amazon Associates is added in the future).
+    </p>
+
+    <h2>Sponsored Content</h2>
+    <p>
+      If we ever publish sponsored content — where a company pays us to write about their product — it will be clearly marked as "Sponsored" or "Paid Partnership." As of now, {SITE.title} does not publish sponsored content.
+    </p>
+
+    <h2>Why Affiliate Links Matter</h2>
+    <p>
+      Creating in-depth reviews and guides takes significant time and research. Affiliate commissions allow us to keep {SITE.title} free for everyone — no paywalls, no subscription fees. When you purchase through our links, you're directly supporting the work we do.
+    </p>
+
+    <h2>Your Trust Matters Most</h2>
+    <p>
+      If you ever feel a recommendation doesn't meet your expectations, we want to hear about it. We're committed to earning and keeping your trust. If you have questions or concerns about our affiliate relationships, please reach out through our <a href="/about">About page</a>.
+    </p>
+  </div>
+</BaseLayout>
