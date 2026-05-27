@@ -73,6 +73,7 @@ const totalWords = filtered.reduce((s, a) => s + (a.frontmatter.wordCount || 0),
             tags={article.frontmatter.tags}
             wordCount={article.frontmatter.wordCount}
             contentType={article.frontmatter.contentType}
+            image={article.frontmatter.image}
           />
         ))}
       </div>

@@ -22,6 +22,9 @@
         "wordCount": {
           "type": "number"
         },
+        "image": {
+          "type": "string"
+        },
         "tags": {
           "type": "array",
           "items": {

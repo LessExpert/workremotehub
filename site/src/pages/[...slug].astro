@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { article } = Astro.props;
-const { title, description, pubDate, contentType, wordCount, tags, schema, affiliateLinks } = article.data;
+const { title, description, pubDate, contentType, wordCount, tags, schema, affiliateLinks, image } = article.data;
 const { Content } = await article.render();
 ---
 
@@ -26,6 +26,7 @@ const { Content } = await article.render();
   tags={tags || []}
   schema={schema || {}}
   affiliateLinks={affiliateLinks || []}
+  image={image}
 >
   <Content />
 </ArticleLayout>

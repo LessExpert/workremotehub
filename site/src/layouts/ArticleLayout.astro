@@ -12,6 +12,7 @@ export interface Props {
   tags?: string[];
   schema?: Record<string, unknown>;
   affiliateLinks?: Array<{ text: string; url: string }>;
+  image?: string;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   tags = [],
   schema = {},
   affiliateLinks = [],
+  image,
 } = Astro.props;
 
 const readingTime = wordCount ? Math.max(1, Math.ceil(wordCount / 200)) + " min read" : "";
@@ -70,6 +72,19 @@ const contentTypes: Record<string, string> = {
             </div>
           )}
         </header>
+
+        {image && (
+          <div class="article-hero-image">
+            <img
+              src={image}
+              alt={title}
+              loading="eager"
+              width="1200"
+              height="600"
+              style="width:100%;height:auto;border-radius:12px;margin-bottom:2rem;"
+            />
+          </div>
+        )}
 
         <div class="article-body">
           <slot />
