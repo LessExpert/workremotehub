@@ -2,10 +2,15 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://workremotehub.com", // CHANGE to your real domain
+  // CHANGE to your real domain
+  site: "https://workremotehub.com",
+
   output: "static",
+
   integrations: [
     mdx(),
     sitemap({
@@ -21,19 +26,24 @@ export default defineConfig({
       },
     }),
   ],
+
   markdown: {
     shikiConfig: {
       theme: "github-light",
       wrap: true,
     },
   },
+
   build: {
     // Ensure all content pages are included
     format: "directory",
   },
+
   vite: {
     ssr: {
       noExternal: [], // External deps as needed
     },
   },
+
+  adapter: cloudflare()
 });
