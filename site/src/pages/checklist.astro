@@ -1,0 +1,229 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="The Ultimate Home Office Setup Checklist" description="50+ items across 8 categories to build the perfect remote workspace. Budget tiers for $500, $1,000, and $2,000.">
+  <div class="container-narrow" style="padding: 2rem 0 4rem;">
+
+    <header style="margin-bottom: 2rem;">
+      <div class="hero-badge" style="margin-bottom: 1rem;">✅ Checklist</div>
+      <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">The Ultimate Home Office Setup Checklist</h1>
+      <p style="color: var(--gray-500); font-size: 1.1rem;">
+        50+ items across 8 categories. Three budget tiers. One workspace you'll actually enjoy.
+      </p>
+    </header>
+
+    <!-- Budget tier selector -->
+    <div style="display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap;">
+      <span style="background: var(--brand-600); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">All Tiers</span>
+      <span style="background: var(--gray-100); color: var(--gray-600); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">💵 Budget: ~$500</span>
+      <span style="background: var(--gray-100); color: var(--gray-600); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">💵💵 Mid: ~$1,000</span>
+      <span style="background: var(--gray-100); color: var(--gray-600); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">💵💵💵 Premium: ~$2,000</span>
+    </div>
+
+    <!-- 1. Desk -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">🪵 1. Desk & Worksurface</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">The foundation. Get this wrong and nothing else matters.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> Standing desk (electric preferred — Uplift V2, FlexiSpot E7, or Fully Jarvis)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Desktop depth of at least 30 inches (60"–72" width recommended for dual monitors)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Desk height: elbows at 90° when typing, wrists straight</div>
+        <div><span style="color: var(--gray-400);">☐</span> Cable management tray or under-desk net (IKEA Signum, J Channel raceway)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Desk mat or felt pad to protect surface and reduce noise</div>
+        <div><span style="color: var(--gray-400);">☐</span> Monitor arm(s) — frees desk space, enables height adjustment (ErGear, Amazon Basics, or Ergotron)</div>
+      </div>
+    </section>
+
+    <!-- 2. Chair -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">🪑 2. Chair & Ergonomics</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">Your back will thank you in 10 years. Do not cheap out here.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> Ergonomic chair with adjustable lumbar support (Herman Miller Aeron, Steelcase Leap v2, or Branch Ergonomic Chair)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Seat height: feet flat on floor, thighs parallel to ground</div>
+        <div><span style="color: var(--gray-400);">☐</span> Armrests: at elbow height so shoulders stay relaxed</div>
+        <div><span style="color: var(--gray-400);">☐</span> Seat depth: 2–3 finger-width gap between seat edge and back of knees</div>
+        <div><span style="color: var(--gray-400);">☐</span> Lumbar support: contacts your lower back, not mid-back</div>
+        <div><span style="color: var(--gray-400);">☐</span> Headrest (optional) — useful if you recline during calls or thinking breaks</div>
+        <div><span style="color: var(--gray-400);">☐</span> Footrest if desk height and chair can't align (Mind Reader or Kensington)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Anti-fatigue mat if using standing desk (Topo Comfort Mat or Gorilla Grip)</div>
+      </div>
+    </section>
+
+    <!-- 3. Monitor -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">🖥️ 3. Monitor & Display</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">One screen is not enough. Your laptop screen is ergonomic poison.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> Primary monitor: 27" 4K or 1440p (Dell U2723QE, LG 27UK850-W, or BenQ PD2705U)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Secondary monitor (optional but transformative): same model for color consistency, or vertical 24" for docs/code</div>
+        <div><span style="color: var(--gray-400);">☐</span> Monitor top bezel at eye level — you should look slightly down (not up)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Monitor distance: arm's length (~20–30 inches from eyes)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Blue light filter enabled after sunset (f.lux, Night Light, or built-in monitor setting)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Brightness matched to room ambient light — not noticeably brighter than surroundings</div>
+        <div><span style="color: var(--gray-400);">☐</span> Laptop stand (if using laptop as secondary screen) — Rain Design mStand or Twelve South Curve</div>
+      </div>
+    </section>
+
+    <!-- 4. Keyboard & Mouse -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">⌨️ 4. Keyboard & Mouse</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">The tools you touch 8 hours a day. Every dollar here pays back in comfort.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> Mechanical keyboard (Keychron K8, Logitech MX Mechanical, or NuPhy Air75)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Or ergonomic split keyboard if you have wrist issues (ZSA Moonlander, Kinesis Freestyle2, or Microsoft Sculpt)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Wrist rest — gel or memory foam (HyperX or Glorious)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Ergonomic mouse (Logitech MX Master 3S for general use, Logitech Lift or MX Vertical for vertical grip)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Mouse pad — large desk mat style preferred (SteelSeries QcK, Orbitkey Desk Mat)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Trackpad or trackball as secondary input to vary hand position (Apple Magic Trackpad or Kensington Expert)</div>
+      </div>
+    </section>
+
+    <!-- 5. Audio -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">🎧 5. Audio & Communication</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">Bad audio makes you sound like you don't care. Fix this before anything else.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> Noise-canceling headphones (Sony WH-1000XM5, Bose QC Ultra, or AirPods Max)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Dedicated microphone (Blue Yeti, Shure MV7, or Rode NT-USB Mini) — do not use laptop mic on calls</div>
+        <div><span style="color: var(--gray-400);">☐</span> Mic arm or stand to position mic 4–6 inches from mouth (Blue Compass or Rode PSA1+)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Pop filter if using condenser mic (foam windscreen or mesh filter)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Speakers for music/no-headphone time (Audioengine A2+, Kanto YU2, or Creative Pebble for budget)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Focus/concentration music setup (Brain.fm subscription, Endel, or Lo-Fi playlist)</div>
+      </div>
+    </section>
+
+    <!-- 6. Webcam & Lighting -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">💡 6. Webcam & Lighting</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">Lighting matters more than the camera. Good light makes a $70 webcam look like a $500 one.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> External webcam (Logitech C920s Pro, Logitech Brio 500, or Opal C1 for Mac)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Webcam at eye level — not looking up your nose from laptop cam</div>
+        <div><span style="color: var(--gray-400);">☐</span> Key light facing you from behind the monitor (Elgato Key Light, Lume Cube, or clamp ring light)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Window in front or to the side — never behind you (backlight = silhouette)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Warm/neutral light (4000K–5600K color temperature) — avoid cool blue office light on camera</div>
+        <div><span style="color: var(--gray-400);">☐</span> Background: clean, not distracting. Bookshelf, plant, simple wall. Or use virtual background.</div>
+      </div>
+    </section>
+
+    <!-- 7. Cable Management -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">🔌 7. Cable & Power Management</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">Visible cables signal chaos. Hidden cables signal competence — even if only to yourself.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> Surge protector with enough outlets (Belkin 12-outlet, Tripp Lite, or Anker PowerPort)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Cable raceway or sleeve to bundle desk-to-wall cables (J Channel, Alex Tech sleeve)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Under-desk cable tray — mount power strip and excess cable length</div>
+        <div><span style="color: var(--gray-400);">☐</span> Cable clips or adhesive organizers along desk edge for frequently used cables</div>
+        <div><span style="color: var(--gray-400);">☐</span> USB hub or docking station (CalDigit TS4 for Mac, Plugable or Anker for PC) — one cable to rule them all</div>
+        <div><span style="color: var(--gray-400);">☐</span> Label cables at both ends (label maker or colored tape)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Velcro ties — never zip ties (you will re-route cables, and zip ties make you hate yourself)</div>
+      </div>
+    </section>
+
+    <!-- 8. Environment & Extras -->
+    <section style="margin-bottom: 2.5rem; background: var(--gray-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">🌿 8. Environment & Quality of Life</h2>
+      <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1.25rem;">The difference between a cubicle and a workspace you want to be in.</p>
+      <div style="display: grid; gap: 0.6rem;">
+        <div><span style="color: var(--gray-400);">☐</span> Plants (snake plant, pothos, or ZZ plant — all are low-light, hard to kill)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Desk lamp with adjustable brightness and color temp (BenQ ScreenBar, TaoTronics LED, or Xiaomi Mi)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Room temperature: 70–74°F (21–23°C) — too warm = drowsy, too cold = distracted</div>
+        <div><span style="color: var(--gray-400);">☐</span> Air quality: HEPA air purifier if in urban area (Levoit Core 300 or Coway AP-1512HH)</div>
+        <div><span style="color: var(--gray-400);">☐</span> White noise machine or app for focus (LectroFan or myNoise.net)</div>
+        <div><span style="color: var(--gray-400);">☐</span> Notebook and pen within arm's reach — analog thinking still wins sometimes</div>
+        <div><span style="color: var(--gray-400);">☐</span> Water bottle that stays on your desk (Hydro Flask, Owala, or Yeti) — hydration = cognition</div>
+        <div><span style="color: var(--gray-400);">☐</span> Timer for Pomodoro or focus blocks (physical: Time Timer; digital: Toggl Track or Flow)</div>
+      </div>
+    </section>
+
+    <!-- Budget breakdowns -->
+    <section style="margin-top: 3rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">💰 Budget Tier Breakdowns</h2>
+
+      <div style="display: grid; gap: 1.5rem;">
+
+        <!-- Budget Tier -->
+        <div style="background: var(--gray-50); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--brand-600);">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">💵 Budget Build — ~$500</h3>
+          <p style="color: var(--gray-500); font-size: 0.9rem; margin-bottom: 1rem;">Solid, functional, no luxury items. Prioritizes the chair and monitor.</p>
+          <table style="width: 100%; font-size: 0.9rem; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">FlexiSpot E7 or manual standing desk</td><td style="text-align: right; color: var(--gray-500);">$200</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Branch Ergonomic Chair</td><td style="text-align: right; color: var(--gray-500);">$350</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">24" 1080p monitor (Dell S2421H)</td><td style="text-align: right; color: var(--gray-500);">$119</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Logitech K380 keyboard + M350 mouse combo</td><td style="text-align: right; color: var(--gray-500);">$50</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Monitor riser stand (wood block or $20 Amazon stand)</td><td style="text-align: right; color: var(--gray-500);">$20</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Cable clips + surge protector</td><td style="text-align: right; color: var(--gray-500);">$30</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Creative Pebble speakers</td><td style="text-align: right; color: var(--gray-500);">$25</td></tr>
+            <tr style="font-weight: 600;"><td style="padding: 0.5rem 0; border-top: 2px solid var(--gray-300);">Total</td><td style="text-align: right; padding: 0.5rem 0; border-top: 2px solid var(--gray-300);">~$794</td></tr>
+          </table>
+          <p style="font-size: 0.8rem; color: var(--gray-400); margin-top: 0.5rem;">Add $50–70 for a Logitech C270 webcam. Skip the headset if your laptop has decent speakers.</p>
+        </div>
+
+        <!-- Mid Tier -->
+        <div style="background: var(--gray-50); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-500);">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">💵💵 Mid-Range Build — ~$1,000</h3>
+          <p style="color: var(--gray-500); font-size: 0.9rem; margin-bottom: 1rem;">The sweet spot. No compromises on ergonomics, plus solid audio and lighting.</p>
+          <table style="width: 100%; font-size: 0.9rem; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Uplift V2 standing desk (60")</td><td style="text-align: right; color: var(--gray-500);">$599</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Steelcase Series 1 or refurb Leap v2</td><td style="text-align: right; color: var(--gray-500);">$450</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">27" 1440p monitor (Dell S2722QC)</td><td style="text-align: right; color: var(--gray-500);">$320</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Keychron K8 + Logitech MX Master 3S</td><td style="text-align: right; color: var(--gray-500);">$160</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Monitor arm (ErGear single arm)</td><td style="text-align: right; color: var(--gray-500);">$35</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Blue Yeti mic + arm</td><td style="text-align: right; color: var(--gray-500);">$140</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">BenQ ScreenBar monitor lamp</td><td style="text-align: right; color: var(--gray-500);">$110</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Cable management kit + velcro ties</td><td style="text-align: right; color: var(--gray-500);">$40</td></tr>
+            <tr style="font-weight: 600;"><td style="padding: 0.5rem 0; border-top: 2px solid var(--gray-300);">Total</td><td style="text-align: right; padding: 0.5rem 0; border-top: 2px solid var(--gray-300);">~$1,854</td></tr>
+          </table>
+          <p style="font-size: 0.8rem; color: var(--gray-400); margin-top: 0.5rem;">Could save $200 by finding a refurbished Steelcase/Herman Miller chair. Add $100 for Sony WH-CH720N headphones.</p>
+        </div>
+
+        <!-- Premium Tier -->
+        <div style="background: var(--gray-50); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--brand-800);">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">💵💵💵 Premium Build — ~$2,000</h3>
+          <p style="color: var(--gray-500); font-size: 0.9rem; margin-bottom: 1rem;">No compromises. Professional-quality audio, video, and ergonomics.</p>
+          <table style="width: 100%; font-size: 0.9rem; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Fully Jarvis or Uplift V2 (72")</td><td style="text-align: right; color: var(--gray-500);">$700</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Herman Miller Aeron (new or certified refurb)</td><td style="text-align: right; color: var(--gray-500);">$1,100</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Dual 27" 4K monitors (Dell U2723QE)</td><td style="text-align: right; color: var(--gray-500);">$1,100</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Dual monitor arm (Ergotron LX)</td><td style="text-align: right; color: var(--gray-500);">$200</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">NuPhy Air75 + Logitech MX Master 3S</td><td style="text-align: right; color: var(--gray-500);">$210</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Shure MV7 mic + Rode PSA1+ arm</td><td style="text-align: right; color: var(--gray-500);">$350</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Elgato Key Light Air (×2 for even lighting)</td><td style="text-align: right; color: var(--gray-500);">$260</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Opal C1 webcam or Logitech Brio 500</td><td style="text-align: right; color: var(--gray-500);">$130</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">Sony WH-1000XM5 headphones</td><td style="text-align: right; color: var(--gray-500);">$330</td></tr>
+            <tr style="border-bottom: 1px solid var(--gray-200);"><td style="padding: 0.3rem 0;">CalDigit TS4 dock + cable management</td><td style="text-align: right; color: var(--gray-500);">$380</td></tr>
+            <tr style="font-weight: 600;"><td style="padding: 0.5rem 0; border-top: 2px solid var(--gray-300);">Total</td><td style="text-align: right; padding: 0.5rem 0; border-top: 2px solid var(--gray-300);">~$4,760</td></tr>
+          </table>
+          <p style="font-size: 0.8rem; color: var(--gray-400); margin-top: 0.5rem;">Real premium is about $4,700, not $2,000 — the chair and dual monitors do the heavy lifting. Drop to one monitor and a refurb Aeron to hit ~$3,200.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Final tips -->
+    <section style="margin-top: 3rem; background: var(--brand-50); border-radius: 12px; padding: 1.5rem;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.75rem;">💡 Pro Tips for Remote Workers</h2>
+      <ol style="color: var(--gray-700); line-height: 1.8; font-size: 0.95rem; padding-left: 1.2rem;">
+        <li><strong>Buy the chair first.</strong> It's the only item touching your body for 8+ hours. Everything else is negotiable.</li>
+        <li><strong>Lighting > camera.</strong> A $50 ring light makes a $70 webcam look better than a $200 webcam in a dark room.</li>
+        <li><strong>Cable manage once, enjoy forever.</strong> An hour with velcro ties and a cable tray pays back every day you sit down.</li>
+        <li><strong>Plants aren't decoration — they're noise reduction.</strong> Snake plants and bookshelves absorb echo, making you sound better on calls.</li>
+        <li><strong>Standing desk ≠ standing all day.</strong> Alternate 30 min sit / 15 min stand. The goal is movement, not endurance.</li>
+        <li><strong>One cable setup.</strong> A Thunderbolt dock means you plug one cable into your laptop and everything connects — monitors, ethernet, audio, power.</li>
+        <li><strong>Test your setup on a real call.</strong> Record a 2-minute Loom video. Watch it. Fix what looks or sounds bad. Repeat.</li>
+      </ol>
+    </section>
+
+    <!-- Printable version note -->
+    <div style="text-align: center; margin-top: 3rem; padding: 1.5rem; background: var(--gray-50); border-radius: 12px;">
+      <p style="color: var(--gray-500); font-size: 0.9rem;">
+        📋 <strong>Want a printable version?</strong> Use your browser's Print function (Ctrl+P / Cmd+P) — 
+        this page is formatted to print cleanly without ads or navigation.
+      </p>
+    </div>
+
+  </div>
+</BaseLayout>

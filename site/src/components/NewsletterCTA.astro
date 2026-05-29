@@ -1,0 +1,113 @@
+---
+/**
+ * Newsletter CTA component — inline email capture for article pages.
+ * Place between article content and author bio.
+ */
+---
+
+<div class="newsletter-inline-cta">
+  <div class="cta-content">
+    <span class="cta-icon">📋</span>
+    <div class="cta-text">
+      <h3>Get the Free Home Office Setup Checklist</h3>
+      <p>50+ items across 8 categories. Three budget tiers. Make sure your workspace is dialed in.</p>
+    </div>
+  </div>
+  <form
+    action="https://buttondown.com/api/emails/embed-subscribe/workremotehub"
+    method="post"
+    target="popupwindow"
+    class="cta-form"
+  >
+    <input type="email" name="email" placeholder="your@email.com" required />
+    <button type="submit">Send My Checklist</button>
+  </form>
+  <p class="cta-disclaimer">No spam. Unsubscribe anytime. We'll send the checklist and occasional gear tips.</p>
+</div>
+
+<style>
+  .newsletter-inline-cta {
+    background: linear-gradient(135deg, var(--brand-50), var(--gray-50));
+    border: 1px solid var(--brand-100);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .cta-text {
+    text-align: left;
+  }
+
+  .cta-text h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+    color: var(--brand-800);
+  }
+
+  .cta-text p {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    line-height: 1.4;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-form input {
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    min-width: 220px;
+    max-width: 100%;
+  }
+
+  .cta-form input:focus {
+    outline: none;
+    border-color: var(--brand-500);
+    box-shadow: 0 0 0 2px var(--brand-100);
+  }
+
+  .cta-form button {
+    padding: 0.65rem 1.25rem;
+    background: var(--brand-600);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+
+  .cta-form button:hover {
+    background: var(--brand-700);
+  }
+
+  .cta-disclaimer {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-top: 0.6rem;
+  }
+</style>
