@@ -1,71 +1,64 @@
 {
-  "$ref": "#/definitions/articles",
-  "definitions": {
-    "articles": {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "slug": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "pubDate": {
-          "type": "string"
-        },
-        "contentType": {
-          "type": "string"
-        },
-        "wordCount": {
-          "type": "number"
-        },
-        "image": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "pubDate": {
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string"
+    },
+    "wordCount": {
+      "type": "number"
+    },
+    "image": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema": {},
+    "affiliateLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "url": {
             "type": "string"
           }
         },
-        "schema": {},
-        "affiliateLinks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "text",
-              "url"
-            ],
-            "additionalProperties": false
-          }
-        },
-        "draft": {
-          "type": "boolean",
-          "default": false
-        },
-        "$schema": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "title",
-        "description",
-        "pubDate"
-      ],
-      "additionalProperties": false
+        "required": [
+          "text",
+          "url"
+        ]
+      }
+    },
+    "draft": {
+      "default": false,
+      "type": "boolean"
+    },
+    "$schema": {
+      "type": "string"
     }
   },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "required": [
+    "title",
+    "description",
+    "pubDate"
+  ]
 }

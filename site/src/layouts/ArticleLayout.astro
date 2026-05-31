@@ -13,6 +13,7 @@ export interface Props {
   schema?: Record<string, unknown>;
   affiliateLinks?: Array<{ text: string; url: string }>;
   image?: string;
+  headers?: Array<{ depth: number; slug: string; text: string }>;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   schema = {},
   affiliateLinks = [],
   image,
+  headers = [],
 } = Astro.props;
 
 const readingTime = wordCount ? Math.max(1, Math.ceil(wordCount / 200)) + " min read" : "";
@@ -86,11 +88,34 @@ const contentTypes: Record<string, string> = {
           </div>
         )}
 
-        <div class="article-body">
+        <div class="article-body" id="article-body">
           <slot />
         </div>
 
-        <AdPlaceholder position="after-content" />
+        <!-- Dynamically generate ToC if no headers were passed -->
+        <script type="module">
+          // If the layout received no headers, build them client‑side from the rendered headings.
+          const tocContainer = document.querySelector('.toc ol');
+          if (tocContainer && tocContainer.children.length === 0) {
+            const body = document.getElementById('article-body');
+            const headings = body.querySelectorAll('h2, h3');
+            headings.forEach((h) => {
+              const depth = h.tagName === 'H2' ? 2 : 3;
+              const text = h.textContent.trim();
+              const slug = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+              h.id = slug; // ensure anchor works
+              const li = document.createElement('li');
+              li.style.marginLeft = `${(depth - 2) * 1}rem`;
+              const a = document.createElement('a');
+              a.href = `#${slug}`;
+              a.textContent = text;
+              li.appendChild(a);
+              tocContainer.appendChild(li);
+            });
+          }
+        </script>
+
+        <AdPlaceholder position="after-content" class="display-ad" />
 
         <!-- Author Bio -->
         <div class="author-bio">
@@ -155,10 +180,9 @@ const contentTypes: Record<string, string> = {
           <h3>📖 Table of Contents</h3>
           <nav class="toc">
             <ol>
-              <li><a href="#overview">Overview</a></li>
-              <li><a href="#features">Key Features</a></li>
-              <li><a href="#comparison">Comparison</a></li>
-              <li><a href="#verdict">Final Verdict</a></li>
+              {headers.map((h) => (
+                <li style={`margin-left: ${(h.depth - 2) * 1}rem`}> <a href={`#${h.slug}`}>{h.text}</a></li>
+              ))}
             </ol>
           </nav>
         </div>
