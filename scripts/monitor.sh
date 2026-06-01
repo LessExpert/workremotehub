@@ -2,7 +2,7 @@
 # monitor.sh - health check script for burniqo.com
 
 SITE_URL="https://burniqo.com"
-SITE_ROOT="/root/workremotehub/site"
+SITE_ROOT="/root/workremotehub-next/site"
 TELEGRAM_CHAT_ID="1645077472"
 
 alert() {

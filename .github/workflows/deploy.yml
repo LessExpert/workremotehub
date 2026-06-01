@@ -1,41 +1,31 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Production
 
 on:
   push:
-    branches: [main]
-  # Also run daily at 6 AM UTC — picks up new articles from cron pipeline
-  schedule:
-    - cron: "0 6 * * *"
+    branches:
+      - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "npm"
-          cache-dependency-path: site/package-lock.json
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
-        working-directory: site
 
-      - name: Build Astro site
+      - name: Run build
         run: npm run build
-        working-directory: site
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+      - name: Deploy to Vercel
+        uses: vercel/action@v1
         with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: pages deploy site/dist --project-name=remote-work-hub
-          workingDirectory: site
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}

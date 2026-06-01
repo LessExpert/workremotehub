@@ -1,26 +1,27 @@
 # ══════════════════════════════════════════════════
-# Programmatic SEO Content Hub — Configuration
-# Niche: Remote Work & Digital Nomad
+# Crypto Burn Analytics Dashboard — Configuration
+# Niche: Token Burn Tracking & Analytics
 # ══════════════════════════════════════════════════
 
 site:
-  title: "Remote Work Hub"
-  tagline: "Curated tools, tips & gear for the modern remote workforce"
-  domain: "workremotehub.com"
-  base_url: "https://workremotehub.com"
+  title: "Burniqo"
+  tagline: "Real-time token burn tracking and crypto deflation analytics"
+  domain: "burniqo.com"
+  base_url: "https://burniqo.com"
   language: "en"
   locale: "en_US"
 
   # Persona for content voice
   persona:
-    name: "Alex"
-    tone: "practical, confident, slightly conversational"
-    expertise: "5+ years remote work experience, former office convert"
-    audience: "remote workers, freelancers, digital nomads, hybrid employees"
+    name: "Burniqo AI"
+    tone: "data-driven, concise, analytical"
+    expertise: "Blockchain forensics and deflationary tokenomics"
+    audience: "crypto investors, token holders, DeFi analysts"
 
   monetization:
     affiliate_programs:
-      - name: "SaaS Affiliates"
+      - name: "Bitget"
+        referral_code: "GU9J7F2P"
 
 pipeline:
   # Content generation schedule
@@ -40,38 +41,33 @@ pipeline:
   # Keyword sources
   keywords:
     seed_list: [
-      "best headphones for remote work",
-      "ergonomic office chair under 300",
-      "standing desk converter review",
-      "noise cancelling microphone for zoom calls",
-      "best monitor for laptop setup",
-      "wifi extender for home office",
-      "best webcam for remote meetings",
-      "laptop stand for desk",
-      "mechanical keyboard for programming",
-      "USB-C hub for macbook",
-      "best mouse for ergonomics",
-      "desk lamp for eye strain",
-      "cable management for desk",
-      "surge protector for home office",
-      "portable monitor for travel",
-      "best backpack for laptop commute",
-      "coffee maker for home office",
-      "ring light for video calls",
-      "bluetooth speaker for focus music",
-      "pomodoro timer for productivity",
+      "top token burns today",
+      "deflationary token list 2026",
+      "how to track token burns",
+      "BNB chain burn rate",
+      "Ethereum burn rate real-time",
+      "SHIB burn tracker",
+      "best burn trackers 2026",
+      "impact of token burning on price",
+      "top burning coins on Polygon",
+      "Solana burn statistics",
+      "burn mechanism explained",
+      "tokenomics of deflation",
+      "most burned tokens of all time",
+      "crypto burn alerts",
+      "burniqo burn analytics",
     ]
 
     # Topic clusters for interlinking
     clusters:
-      - name: "home-office-setup"
-        keywords: [desk, chair, monitor, lighting, cable management, ergonomics]
-      - name: "remote-work-tools"
-        keywords: [software, app, tool, platform, zoom, slack, notion, asana]
-      - name: "productivity"
-        keywords: [focus, time management, routine, pomodoro, deep work]
-      - name: "digital-nomad"
-        keywords: [travel, portable, backpack, co-working, wifi, vpn]
+      - name: "burn-mechanics"
+        keywords: [burn, deflation, tokenomics, supply, mechanism]
+      - name: "chain-analytics"
+        keywords: [BNB, Ethereum, Polygon, Solana, Avalanche]
+      - name: "token-tracking"
+        keywords: [SHIB, USDT, USDC, DAI, LUNC]
+      - name: "investor-guides"
+        keywords: [analytics, guide, tutorial, strategy, price-impact]
 
   # Interlinking rules
   interlinking:
@@ -82,8 +78,8 @@ pipeline:
 
 seo:
   # Auto-generated meta
-  title_template: "{keyword} — Remote Work Hub Reviews & Guides"
-  description_template: "Looking for {keyword}? Our expert guide covers the top picks, honest reviews, and practical tips for remote workers and digital nomads."
+  title_template: "{keyword} — Burniqo Burn Analytics"
+  description_template: "Track {keyword} in real-time. Burniqo provides deep insights into token burns, deflation rates, and supply reduction across all major chains."
 
   # Schema.org types
   schema_types:
