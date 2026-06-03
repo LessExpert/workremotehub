@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import FloatingWidget from "@/components/FloatingWidget";
+import { useState, useEffect } from "react";
 
 const stats = {
   totalBurned: "1,482,993,221",
@@ -12,12 +13,12 @@ const stats = {
 };
 
 const burnRateData = [
-  { name: "00:00", burn: 1200 },
-  { name: "04:00", burn: 3400 },
-  { name: "08:00", burn: 2100 },
-  { name: "12:00", burn: 4500 },
-  { name: "16:00", burn: 3800 },
-  { name: "20:00", burn: 5200 },
+  { name: "00:00", burn: 900 },
+  { name: "04:00", burn: 1100 },
+  { name: "08:00", burn: 1600 },
+  { name: "12:00", burn: 1300 },
+  { name: "16:00", burn: 1900 },
+  { name: "20:00", burn: 1500 },
 ];
 
 const topTokens = [
@@ -35,6 +36,39 @@ const chainData = [
 ];
 
 export default function DashboardClient() {
+  const [liveFeed, setLiveFeed] = useState([
+    { token: "SHIB", amount: "2,100,000", chain: "", timeAgo: "3 minutes ago" },
+    { token: "ETH", amount: "0.12", chain: "Base", timeAgo: "7 minutes ago" },
+    { token: "LUNC", amount: "50,000", chain: "", timeAgo: "12 minutes ago" },
+  ]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveFeed((prev) => {
+        // Simulate new burn events
+        const tokens = [
+          { token: "SHIB", amount: (Math.floor(Math.random() * 3000000) + 1000000).toLocaleString(), chain: "" },
+          { token: "ETH", amount: (Math.random() * 0.5 + 0.05).toFixed(2), chain: "Base" },
+          { token: "PEPE", amount: (Math.floor(Math.random() * 10000000) + 1000000).toLocaleString(), chain: "Ethereum" },
+          { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" },
+          { token: "BONK", amount: (Math.floor(Math.random() * 5000000) + 1000000).toLocaleString(), chain: "Solana" },
+          { token: "LUNC", amount: (Math.floor(Math.random() * 100000) + 5000).toLocaleString(), chain: "" },
+        ];
+        const token = tokens[Math.floor(Math.random() * tokens.length)];
+        const newEntry = {
+          token: token.token,
+          amount: token.amount,
+          chain: token.chain,
+          timeAgo: "just now",
+        };
+        // Shift existing entries down and add new one at top, keep max 3
+        const updated = [newEntry, ...prev.slice(0, 2)];
+        return updated;
+      });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white border-t border-gray-800">
       <main className="container mx-auto px-4 py-8">
@@ -42,7 +76,7 @@ export default function DashboardClient() {
           <StatCard title="Total Tokens Burned" value={stats.totalBurned} subtext="Across 27 tracked chains" />
           <StatCard title="USD Value Burned" value={stats.usdBurned} subtext="Real-time valuation" />
           <StatCard title="Top Burning Chain" value={stats.topChain} subtext="52.3% of all burns today" />
-          <StatCard title="Fastest Growing Token" value={stats.fastestToken} subtext="+312% burn rate in last 24h" />
+          <StatCard title="Fastest Growing Token" value={stats.fastestToken} subtext="+110% peak burn rate variation" />
         </div>
 
         <section className="bg-gray-900 rounded-xl p-6 mb-6">
@@ -67,9 +101,9 @@ export default function DashboardClient() {
           <div className="bg-gray-900 rounded-xl p-4">
             <h2 className="text-lg font-semibold mb-2">Live Burn Feed</h2>
             <div className="h-48 overflow-y-auto text-sm text-gray-300">
-              <p className="text-gray-500">🔥 2,100,000 SHIB burned — 3 minutes ago</p>
-              <p className="text-gray-500">🔥 0.12 ETH burned (Base) — 7 minutes ago</p>
-              <p className="text-gray-500">🔥 50,000 LUNC burned — 12 minutes ago</p>
+              {liveFeed.map((item, index) => (
+                <p key={index} className="text-gray-500">🔥 {item.amount} {item.token} burned{(item.chain ? ` (${item.chain})` : ``)} — {item.timeAgo}</p>
+              ))}
             </div>
           </div>
           <div className="bg-gray-900 rounded-xl p-4">
