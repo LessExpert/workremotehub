@@ -1,3 +1,4 @@
+// Trigger rebuild - live feed extended to 5 entries
 'use client';
 
 import Link from "next/link";
@@ -101,7 +102,7 @@ export default function DashboardClient() {
 
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
           <div className="bg-gray-900 rounded-xl p-4">
-            <h2 className="text-lg font-semibold mb-2">Live Burn Feed</h2>
+            <h2 className="text-lg font-semibold mb-2">Live Burn Feed (Updated)</h2>
             <div className="h-[20rem] overflow-hidden text-sm text-gray-300 flex flex-col gap-1">
               {liveFeed.map((item, index) => {
                 const timeAgo = Math.floor((Date.now() - item.timestamp) / 60000); // minutes ago
