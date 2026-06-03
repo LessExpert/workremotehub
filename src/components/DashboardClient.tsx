@@ -37,9 +37,9 @@ const chainData = [
 
 export default function DashboardClient() {
   const [liveFeed, setLiveFeed] = useState([
-    { token: "SHIB", amount: "2,100,000", chain: "", timeAgo: "3 minutes ago" },
-    { token: "ETH", amount: "0.12", chain: "Base", timeAgo: "7 minutes ago" },
-    { token: "LUNC", amount: "50,000", chain: "", timeAgo: "12 minutes ago" },
+    { token: "SHIB", amount: "2,100,000", chain: "", timestamp: Date.now() - 3 * 60 * 1000 }, // 3 minutes ago
+    { token: "ETH", amount: "0.12", chain: "Base", timestamp: Date.now() - 7 * 60 * 1000 }, // 7 minutes ago
+    { token: "LUNC", amount: "50,000", chain: "", timestamp: Date.now() - 12 * 60 * 1000 }, // 12 minutes ago
   ]);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function DashboardClient() {
           token: token.token,
           amount: token.amount,
           chain: token.chain,
-          timeAgo: "just now",
+          timestamp: Date.now(), // Current time
         };
         // Shift existing entries down and add new one at top, keep max 3
         const updated = [newEntry, ...prev.slice(0, 2)];
@@ -101,9 +101,15 @@ export default function DashboardClient() {
           <div className="bg-gray-900 rounded-xl p-4">
             <h2 className="text-lg font-semibold mb-2">Live Burn Feed</h2>
             <div className="h-48 overflow-y-auto text-sm text-gray-300">
-              {liveFeed.map((item, index) => (
-                <p key={index} className="text-gray-500">🔥 {item.amount} {item.token} burned{(item.chain ? ` (${item.chain})` : ``)} — {item.timeAgo}</p>
-              ))}
+              {liveFeed.map((item, index) => {
+                const timeAgo = Math.floor((Date.now() - item.timestamp) / 60000); // minutes ago
+                const timeText = timeAgo < 1 ? 'just now' : `${timeAgo} minute${timeAgo !== 1 ? 's' : ''} ago`;
+                return (
+                  <p key={index} className="text-gray-500">
+                    🔥 {item.amount} {item.token} burned{(item.chain ? ` (${item.chain})` : ``)} — {timeText}
+                  </p>
+                );
+              })}
             </div>
           </div>
           <div className="bg-gray-900 rounded-xl p-4">
