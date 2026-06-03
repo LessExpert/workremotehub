@@ -57,11 +57,15 @@ export default function DashboardClient() {
     const interval = setInterval(() => {
       setLiveFeed((prev) => {
         // Simulate new burn events from multiple networks
+        // Increased frequency of FLOKI and PEPE burns as requested
         const tokens = [
           { token: "SHIB", amount: (Math.floor(Math.random() * 3000000) + 1000000).toLocaleString(), chain: "Ethereum" },
           { token: "ETH", amount: (Math.random() * 0.5 + 0.05).toFixed(2), chain: "Ethereum" },
           { token: "PEPE", amount: (Math.floor(Math.random() * 10000000) + 1000000).toLocaleString(), chain: "Ethereum" },
+          { token: "PEPE", amount: (Math.floor(Math.random() * 10000000) + 1000000).toLocaleString(), chain: "Ethereum" }, // Extra PEPE for higher frequency
           { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" },
+          { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" }, // Extra FLOKI for higher frequency
+          { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" }, // Third FLOKI for even higher frequency
           { token: "BONK", amount: (Math.floor(Math.random() * 5000000) + 1000000).toLocaleString(), chain: "Solana" },
           { token: "LUNC", amount: (Math.floor(Math.random() * 100000) + 5000).toLocaleString(), chain: "Terra" },
           { token: "DOGE", amount: (Math.floor(Math.random() * 200000000) + 50000000).toLocaleString(), chain: "Dogecoin" },
