@@ -14,7 +14,7 @@ export default function AffiliateCTA() {
         Still tracking burn analytics across chains
       </p>
       <a
-        href="https://burniqo.com/crypto"
+        href="/dashboard"
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}

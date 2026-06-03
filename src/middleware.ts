@@ -10,7 +10,7 @@ export default withAuth(
     callbacks: {
       authorized: ({ token, req }) => {
         // Public routes
-        const publicPaths = ['/articles', '/crypto', '/about', '/contact', '/']
+        const publicPaths = ['/articles', '/about', '/contact', '/']
         if (publicPaths.some(p => req.nextUrl.pathname.startsWith(p))) {
           return true
         }
