@@ -52,14 +52,21 @@ export default function DashboardClient() {
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveFeed((prev) => {
-        // Simulate new burn events
+        // Simulate new burn events from multiple networks
         const tokens = [
-          { token: "SHIB", amount: (Math.floor(Math.random() * 3000000) + 1000000).toLocaleString(), chain: "" },
-          { token: "ETH", amount: (Math.random() * 0.5 + 0.05).toFixed(2), chain: "Base" },
+          { token: "SHIB", amount: (Math.floor(Math.random() * 3000000) + 1000000).toLocaleString(), chain: "Ethereum" },
+          { token: "ETH", amount: (Math.random() * 0.5 + 0.05).toFixed(2), chain: "Ethereum" },
           { token: "PEPE", amount: (Math.floor(Math.random() * 10000000) + 1000000).toLocaleString(), chain: "Ethereum" },
           { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" },
           { token: "BONK", amount: (Math.floor(Math.random() * 5000000) + 1000000).toLocaleString(), chain: "Solana" },
-          { token: "LUNC", amount: (Math.floor(Math.random() * 100000) + 5000).toLocaleString(), chain: "" },
+          { token: "LUNC", amount: (Math.floor(Math.random() * 100000) + 5000).toLocaleString(), chain: "Terra" },
+          { token: "DOGE", amount: (Math.floor(Math.random() * 200000000) + 50000000).toLocaleString(), chain: "Dogecoin" },
+          { token: "AVAX", amount: (Math.floor(Math.random() * 100000) + 10000).toLocaleString(), chain: "Avalanche" },
+          { token: "MATIC", amount: (Math.floor(Math.random() * 500000) + 50000).toLocaleString(), chain: "Polygon" },
+          { token: "LUNA", amount: (Math.floor(Math.random() * 50000) + 1000).toLocaleString(), chain: "Terra 2.0" },
+          { token: "SOL", amount: (Math.random() * 5 + 0.1).toFixed(2), chain: "Solana" },
+          { token: "DOT", amount: (Math.floor(Math.random() * 10000) + 500).toLocaleString(), chain: "Polkadot" },
+          { token: "ADA", amount: (Math.floor(Math.random() * 50000) + 1000).toLocaleString(), chain: "Cardano" },
         ];
         const token = tokens[Math.floor(Math.random() * tokens.length)];
         const newEntry = {
