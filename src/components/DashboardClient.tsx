@@ -22,9 +22,9 @@ const burnRateData = [
 
 const topTokens = [
   { name: "SHIB", amount: "12.3B", chain: "Ethereum" },
-  { name: "USDT", amount: "8.7B", chain: "BNB Chain" },
-  { name: "USDC", amount: "5.2B", chain: "Polygon" },
-  { name: "DAI", amount: "3.1B", chain: "Avalanche" },
+  { name: "PEPE", amount: "8.9B", chain: "Ethereum" },
+  { name: "FLOKI", amount: "6.2B", chain: "BNB Chain" },
+  { name: "BONK", amount: "4.1B", chain: "Solana" },
 ];
 
 const chainData = [
