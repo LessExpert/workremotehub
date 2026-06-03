@@ -40,6 +40,8 @@ export default function DashboardClient() {
     { token: "SHIB", amount: "2,100,000", chain: "", timestamp: Date.now() - 3 * 60 * 1000 }, // 3 minutes ago
     { token: "ETH", amount: "0.12", chain: "Base", timestamp: Date.now() - 7 * 60 * 1000 }, // 7 minutes ago
     { token: "LUNC", amount: "50,000", chain: "", timestamp: Date.now() - 12 * 60 * 1000 }, // 12 minutes ago
+    { token: "PEPE", amount: "1,200,000", chain: "Ethereum", timestamp: Date.now() - 18 * 60 * 1000 }, // 18 minutes ago
+    { token: "BONK", amount: "200,000", chain: "Solana", timestamp: Date.now() - 25 * 60 * 1000 }, // 25 minutes ago
   ]);
 
   useEffect(() => {
@@ -61,8 +63,8 @@ export default function DashboardClient() {
           chain: token.chain,
           timestamp: Date.now(), // Current time
         };
-        // Shift existing entries down and add new one at top, keep max 3
-        const updated = [newEntry, ...prev.slice(0, 2)];
+        // Shift existing entries down and add new one at top, keep max 5
+        const updated = [newEntry, ...prev.slice(0, 4)];
         return updated;
       });
     }, 5000);
