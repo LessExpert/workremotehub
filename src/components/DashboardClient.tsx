@@ -1,87 +1,68 @@
 'use client';
 
-import React from "react";
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import FloatingWidget from '@/components/FloatingWidget';
+import Link from "next/link";
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import FloatingWidget from "@/components/FloatingWidget";
 
 const stats = {
-  totalBurned: '1,482,993,221',
-  usdBurned: '$42,118,992',
-  topChain: 'BNB Chain',
-  fastestToken: 'SHIB',
+  totalBurned: "1,482,993,221",
+  usdBurned: "$42,118,992",
+  topChain: "BNB Chain",
+  fastestToken: "SHIB",
 };
 
 const burnRateData = [
-  { name: '00:00', burn: 1200 },
-  { name: '04:00', burn: 3400 },
-  { name: '08:00', burn: 2100 },
-  { name: '12:00', burn: 4500 },
-  { name: '16:00', burn: 3800 },
-  { name: '20:00', burn: 5200 },
+  { name: "00:00", burn: 1200 },
+  { name: "04:00", burn: 3400 },
+  { name: "08:00", burn: 2100 },
+  { name: "12:00", burn: 4500 },
+  { name: "16:00", burn: 3800 },
+  { name: "20:00", burn: 5200 },
 ];
 
 const topTokens = [
-  { name: 'SHIB', amount: '12.3B', chain: 'Ethereum' },
-  { name: 'USDT', amount: '8.7B', chain: 'BNB Chain' },
-  { name: 'USDC', amount: '5.2B', chain: 'Polygon' },
-  { name: 'DAI', amount: '3.1B', chain: 'Avalanche' },
+  { name: "SHIB", amount: "12.3B", chain: "Ethereum" },
+  { name: "USDT", amount: "8.7B", chain: "BNB Chain" },
+  { name: "USDC", amount: "5.2B", chain: "Polygon" },
+  { name: "DAI", amount: "3.1B", chain: "Avalanche" },
 ];
 
 const chainData = [
-  { chain: 'BNB Chain', burn: 52.3, color: '#FF6B35' },
-  { chain: 'Ethereum', burn: 18.7, color: '#627EEA' },
-  { chain: 'Polygon', burn: 12.1, color: '#8247E5' },
-  { chain: 'Solana', burn: 8.4, color: '#9945FF' },
+  { chain: "BNB Chain", burn: 52.3, color: "#FF6B35" },
+  { chain: "Ethereum", burn: 18.7, color: "#627EEA" },
+  { chain: "Polygon", burn: 12.1, color: "#8247E5" },
+  { chain: "Solana", burn: 8.4, color: "#9945FF" },
 ];
 
 export default function DashboardClient() {
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white border-t border-gray-800">
       <main className="container mx-auto px-4 py-8">
-        {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div className="bg-gray-900 rounded-xl p-4">
-            <h2 className="text-gray-400 text-sm mb-1">Total Tokens Burned</h2>
-            <p className="text-2xl font-bold">{stats.totalBurned}</p>
-            <p className="text-gray-500 text-sm">Across 27 tracked chains</p>
-          </div>
-          <div className="bg-gray-900 rounded-xl p-4">
-            <h2 className="text-gray-400 text-sm mb-1">USD Value Burned</h2>
-            <p className="text-2xl font-bold">{stats.usdBurned}</p>
-            <p className="text-gray-500 text-sm">Real-time valuation</p>
-          </div>
-          <div className="bg-gray-900 rounded-xl p-4">
-            <h2 className="text-gray-400 text-sm mb-1">Top Burning Chain</h2>
-            <p className="text-2xl font-bold">{stats.topChain}</p>
-            <p className="text-gray-500 text-sm">52.3% of all burns today</p>
-          </div>
-          <div className="bg-gray-900 rounded-xl p-4">
-            <h2 className="text-gray-400 text-sm mb-1">Fastest Growing Token</h2>
-            <p className="text-2xl font-bold">{stats.fastestToken}</p>
-            <p className="text-gray-500 text-sm">+312% burn rate in last 24h</p>
-          </div>
+          <StatCard title="Total Tokens Burned" value={stats.totalBurned} subtext="Across 27 tracked chains" />
+          <StatCard title="USD Value Burned" value={stats.usdBurned} subtext="Real-time valuation" />
+          <StatCard title="Top Burning Chain" value={stats.topChain} subtext="52.3% of all burns today" />
+          <StatCard title="Fastest Growing Token" value={stats.fastestToken} subtext="+312% burn rate in last 24h" />
         </div>
 
-        {/* Burn Rate Chart */}
         <section className="bg-gray-900 rounded-xl p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">Burn Rate Over Time</h2>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={burnRateData}>
               <defs>
                 <linearGradient id="burnGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#FF6B35" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#FF6B35" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#FF6B35" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="#FF6B35" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <XAxis dataKey="name" stroke="#666" />
               <YAxis stroke="#666" />
-              <Tooltip contentStyle={{ backgroundColor: '#111', border: '1px solid #333' }} />
+              <Tooltip contentStyle={{ backgroundColor: "#111", border: "1px solid #333" }} />
               <Area type="monotone" dataKey="burn" stroke="#FF6B35" fill="url(#burnGradient)" />
             </AreaChart>
           </ResponsiveContainer>
         </section>
 
-        {/* Live Feed & Top Tokens */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
           <div className="bg-gray-900 rounded-xl p-4">
             <h2 className="text-lg font-semibold mb-2">Live Burn Feed</h2>
@@ -91,7 +72,6 @@ export default function DashboardClient() {
               <p className="text-gray-500">🔥 50,000 LUNC burned — 12 minutes ago</p>
             </div>
           </div>
-
           <div className="bg-gray-900 rounded-xl p-4">
             <h2 className="text-lg font-semibold mb-2">Top Burning Tokens</h2>
             <table className="w-full text-left">
@@ -115,7 +95,6 @@ export default function DashboardClient() {
           </div>
         </section>
 
-        {/* Chain Comparison */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {chainData.map((c) => (
             <div key={c.chain} className="bg-gray-900 rounded-xl p-4">
@@ -129,6 +108,16 @@ export default function DashboardClient() {
         </section>
       </main>
       <FloatingWidget />
+    </div>
+  );
+}
+
+function StatCard({ title, value, subtext }: { title: string; value: string; subtext?: string }) {
+  return (
+    <div className="bg-gray-900 rounded-xl p-4">
+      <p className="text-gray-400 text-sm mb-1">{title}</p>
+      <p className="text-2xl font-bold">{value}</p>
+      {subtext && <p className="text-gray-500 text-xs mt-1">{subtext}</p>}
     </div>
   );
 }

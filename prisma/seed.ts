@@ -1,63 +1,40 @@
-import { PrismaClient } from '@prisma/client'
+// Seed sample articles with burning mechanisms
+import { prisma } from '@/lib/prisma';
 
-const prisma = new PrismaClient()
+const articles = [
+  {
+    title: "Binance Coin (BNB) - Burn Mechanism Deep Dive",
+    slug: 'binance-coin-burn-mechanism',
+    description: "How BNB quarterly token burns affect supply dynamics and network security",
+    content: 'Binance regularly burns BNB tokens from its reserves. This reduces circulating supply, creating scarcity and potentially increasing token value. Learn how a 50% supply burn since 2017 impacts BNB holders and BSC network fees.',
+    published: true,
+    tags: 'burning, tokenomics, binance',
+    authorId: 'user123',
+  },
+  {
+    title: "Ethereum EIP-1559 - Permanent Burn System Explained",
+    slug: 'ethereum-eip-1559',
+    description: "How EIP-1559 base fee burn creates deflationary pressure on ETH",
+    content: "EIP-1559 introduced a burn mechanism for ETH gas fees. Every transaction burns a portion of ETH, reducing supply over time. This blog explores the implications for Ethereum monetary policy and gas pricing.",
+    published: true,
+    tags: 'burning, deflationary, ethereum',
+    authorId: 'user123',
+  },
+  {
+    title: "SafeMoon Automatic Burn and Reward System",
+    slug: 'safemoon-burn-mechanics',
+    description: "SafeMoon dual burn-and-reward model: 8% goes to holders, 2% burns permanently",
+    content: 'SafeMoon allocates 8% of every transaction to holders (Safemoon Rewards) and burns 2% permanently. This creates a unique economic model that incentivizes holding while reducing token supply.',
+    published: true,
+    tags: 'burning, reward, ssto',
+    authorId: 'user123',
+  },
+];
 
-async function main() {
-  console.log('Seeding articles...')
-  
-  // Create default admin user
-  const admin = await prisma.user.upsert({
-    where: { email: 'hello@burniqo.com' },
-    update: {},
-    create: {
-      email: 'hello@burniqo.com',
-      name: 'Jeff Vellingan',
-      role: 'ADMIN',
-    },
-  })
-  console.log(`Admin user: ${admin.email}`)
-
-  // Read articles from content directory
-  const fs = require('fs')
-  const path = require('path')
-  const matter = require('gray-matter')
-  
-  const articlesDir = path.join(__dirname, '..', 'src', 'content', 'articles')
-  const files = fs.readdirSync(articlesDir).filter((f: string) => f.endsWith('.mdx'))
-
-  for (const file of files) {
-    const raw = fs.readFileSync(path.join(articlesDir, file), 'utf8')
-    const { data, content } = matter(raw)
-    
-    const article = {
-      title: data.title,
-      slug: data.slug,
-      description: data.description || '',
-      content: content.trim(),
-      pubDate: data.pubDate ? new Date(data.pubDate) : new Date(),
-      contentType: data.contentType || 'article',
-      wordCount: data.wordCount || content.split(/\s+/).length,
-      tags: JSON.stringify(data.tags || []),
-      published: !data.draft,
-      authorId: admin.id,
-    }
-
-    await prisma.article.upsert({
-      where: { slug: article.slug },
-      update: article,
-      create: article,
-    })
-    console.log(`  ✓ ${article.slug}`)
-  }
-
-  console.log(`Seeded ${files.length} articles`)
-}
-
-main()
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+articles.forEach(async (article) => {
+  await prisma.article.upsert({
+    where: { slug: article.slug },
+    update: article,
+    create: article,
+  });
+});

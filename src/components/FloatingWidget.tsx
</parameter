@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
 const FloatingWidget: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,7 +11,7 @@ const FloatingWidget: React.FC = () => {
       el.style.transform = `translateY(${y}px)`;
       requestAnimationFrame(move);
     };
-    move();
+    requestAnimationFrame(move);
   }, []);
 
   return (
@@ -21,20 +19,9 @@ const FloatingWidget: React.FC = () => {
       ref={containerRef}
       className="fixed bottom-4 right-4 w-14 h-14 rounded-full bg-orange-400 shadow-lg flex items-center justify-center"
     >
-      <svg
-        className="w-6 h-6 text-white"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="12" cy="12" r="10" stroke="white" strokeWidth={2} />
-        <path
-          d="M12 8V12L14 14"
-          stroke="white"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+      <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="2"/>
+        <path d="M12 8V12L14 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     </div>
   );
