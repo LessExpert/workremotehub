@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
   images: {
     remotePatterns: [
       {
@@ -24,8 +28,12 @@ const nextConfig = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   },
-  // Set the project root to src so that app/ and components/ are resolved correctly
-  dir: './src',
+  // output: 'export',
 };
 
-export default nextConfig;
+import bundleAnalyzer from '@next/bundle-analyzer';
+const withBundleAnalyzer = bundleAnalyzer;
+
+export default withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})(nextConfig);

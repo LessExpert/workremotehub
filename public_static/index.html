@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burniqo Live Burn Feed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0D0D0D;
+            color: white;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1, h2 {
+            color: #FF6B35;
+        }
+        .live-feed-container {
+            height: 20rem;
+            overflow-y: auto;
+            background-color: #1A1A1A;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            contain: content;
+        }
+        .live-feed-container p {
+            color: #D1D5DB;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+        .live-feed-container p:last-child {
+            border-bottom: none;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background-color: #1A1A1A;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF6B35;
+        }
+        .stat-label {
+            color: #9CA3AF;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        .stat-subtext {
+            color: #6B7280;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        .top-tokens {
+            background-color: #1A1A1A;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .top-tokens table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .top-tokens th {
+            background-color: #2D2D2D;
+            color: #9CA3AF;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+        }
+        .top-tokens td {
+            padding: 1rem;
+            border-bottom: 1px solid #2D2D2D;
+        }
+        .top-tokens tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .token-amount {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+        .token-chain {
+            color: #9CA3AF;
+            font-size: 0.875rem;
+        }
+        .burn-rate-chart {
+            background-color: #1A1A1A;
+            border-radius: 0.5rem;
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+        .chain-bars {
+            display: grid;
+            gap: 1rem;
+        }
+        .chain-item {
+            background-color: #1A1A1A;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+        .chain-label {
+            color: #9CA3AF;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        .chain-percent {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF6B35;
+        }
+        .chain-bar {
+            background-color: #2D2D2D;
+            height: 0.5rem;
+            border-radius: 0.25rem;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .chain-bar-fill {
+            background-color: #FF6B35;
+            height: 100%;
+            border-radius: 0.25rem;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="live-feed-section">
+    <h2>Live Burn Feed (Updated)</h2>
+    <div class="live-feed-container" id="liveFeed">
+        <!-- Live feed items will be inserted here -->
+    </div>
+</div>
+
+<div class="burn-rate-chart">
+    <!-- Chart would go here in a real implementation -->
+    <div style="text-align: center; color: #6B7280; padding: 2rem;">Burn Rate Chart (simplified)</div>
+</div>
+
+        <div class="top-tokens-section">
+            <h2>Top Burning Tokens</h2>
+            <div class="top-tokens">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Amount</th>
+                            <th>Chain</th>
+                        </tr>
+                    </thead>
+                    <tbody id="topTokensBody">
+                        <!-- Top tokens will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <div class="chain-section">
+            <h2>Burn Distribution by Chain</h2>
+            <div class="chain-bars" id="chainBars">
+                <!-- Chain bars will be inserted here -->
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize data
+        const stats = {
+            totalBurned: "1,482,993,221",
+            usdBurned: "$42,118,992",
+            topChain: "BNB Chain",
+            fastestToken: "SHIB"
+        };
+
+        const topTokens = [
+            { name: "SHIB", amount: "12.3B", chain: "Ethereum" },
+            { name: "PEPE", amount: "8.9B", chain: "Ethereum" },
+            { name: "FLOKI", amount: "6.2B", chain: "BNB Chain" },
+            { name: "BONK", amount: "4.1B", chain: "Solana" }
+        ];
+
+        const chainData = [
+            { chain: "BNB Chain", burn: 52.3, color: "#FF6B35" },
+            { chain: "Ethereum", burn: 18.7, color: "#627EEA" },
+            { chain: "Polygon", burn: 12.1, color: "#8247E5" },
+            { chain: "Solana", burn: 8.4, color: "#9945FF" }
+        ];
+
+        // Initialize live feed with user's requested entries
+        let liveFeed = [
+            { token: "SHIB", amount: "2,100,000", chain: "Ethereum", timestamp: Date.now() - 3 * 60 * 1000 },
+            { token: "ETH", amount: "0.12", chain: "Ethereum", timestamp: Date.now() - 7 * 60 * 1000 },
+            { token: "LUNC", amount: "50,000", chain: "Terra", timestamp: Date.now() - 12 * 60 * 1000 },
+            { token: "PEPE", amount: "1,200,000", chain: "Ethereum", timestamp: Date.now() - 18 * 60 * 1000 },
+            { token: "BONK", amount: "200,000", chain: "Solana", timestamp: Date.now() - 25 * 60 * 1000 },
+            { token: "DOGE", amount: "150,000,000", chain: "Dogecoin", timestamp: Date.now() - 30 * 60 * 1000 },
+            { token: "AVAX", amount: "50,000", chain: "Avalanche", timestamp: Date.now() - 35 * 60 * 1000 },
+            { token: "MATIC", amount: "200,000", chain: "Polygon", timestamp: Date.now() - 40 * 60 * 1000 },
+            { token: "LUNA", amount: "15,000", chain: "Terra 2.0", timestamp: Date.now() - 45 * 60 * 1000 },
+            { token: "SOL", amount: "0.8", chain: "Solana", timestamp: Date.now() - 50 * 60 * 1000 },
+            { token: "DOT", amount: "1,200", chain: "Polkadot", timestamp: Date.now() - 55 * 60 * 1000 },
+            { token: "ADA", amount: "8,000", chain: "Cardano", timestamp: Date.now() - 60 * 60 * 1000 },
+            { token: "FLOKI", amount: "4,033,669", chain: "BNB Chain", timestamp: Date.now() - 65 * 60 * 1000 },
+            { token: "FLOKI", amount: "2,593,406", chain: "BNB Chain", timestamp: Date.now() - 70 * 60 * 1000 },
+            { token: "PEPE", amount: "7,117,192", chain: "Ethereum", timestamp: Date.now() - 75 * 60 * 1000 }
+        ];
+
+        // Top tokens for filtering
+        const topTokenSymbols = ["SHIB", "PEPE", "FLOKI", "BONK"];
+
+        // DOM elements
+        const totalBurnedEl = document.getElementById('totalBurned');
+        const usdBurnedEl = document.getElementById('usdBurned');
+        const topChainEl = document.getElementById('topChain');
+        const fastestTokenEl = document.getElementById('fastestToken');
+        const liveFeedContainer = document.getElementById('liveFeed');
+        const topTokensBody = document.getElementById('topTokensBody');
+        const chainBarsContainer = document.getElementById('chainBars');
+
+        // Initialize display
+        function initDisplay() {
+            totalBurnedEl.textContent = stats.totalBurned;
+            usdBurnedEl.textContent = stats.usdBurned;
+            topChainEl.textContent = stats.topChain;
+            fastestTokenEl.textContent = stats.fastestToken;
+
+            renderLiveFeed();
+            renderTopTokenFeed();
+            renderChainBars();
+        }
+
+        function renderLiveFeed() {
+            liveFeedContainer.innerHTML = '';
+            liveFeed.forEach((item, index) => {
+                const timeAgo = Math.floor((Date.now() - item.timestamp) / 60000);
+                const timeText = timeAgo < 1 ? 'just now' : `${timeAgo} minute${timeAgo !== 1 ? 's' : ''} ago`;
+
+                const p = document.createElement('p');
+                p.innerHTML = `🔥 ${item.amount} ${item.token} burned${item.chain ? ` (${item.chain})` : ''} — ${timeText}`;
+                p.className = 'text-gray-500';
+                liveFeedContainer.appendChild(p);
+            });
+        }
+
+        function renderTopTokenFeed() {
+            const topTokenFeedContainer = document.getElementById('topTokenFeed');
+            if (!topTokenFeedContainer) return;
+            topTokenFeedContainer.innerHTML = '';
+            const filtered = liveFeed.filter(item => topTokenSymbols.includes(item.token));
+            filtered.forEach((item, index) => {
+                const timeAgo = Math.floor((Date.now() - item.timestamp) / 60000);
+                const timeText = timeAgo < 1 ? 'just now' : `${timeAgo} minute${timeAgo !== 1 ? 's' : ''} ago`;
+                const p = document.createElement('p');
+                p.innerHTML = `🔥 ${item.amount} ${item.token} burned${item.chain ? ` (${item.chain})` : ''} — ${timeText}`;
+                p.className = 'text-gray-500';
+                topTokenFeedContainer.appendChild(p);
+            });
+        }
+
+        function renderTopTokens() {
+            topTokensBody.innerHTML = '';
+            topTokens.forEach(token => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="py-2 font-medium">${token.name}</td>
+                    <td class="py-2 text-orange-400 token-amount">${token.amount}</td>
+                    <td class="py-2 text-gray-400 token-chain">${token.chain}</td>
+                `;
+                topTokensBody.appendChild(tr);
+            });
+        }
+
+        function renderChainBars() {
+            chainBarsContainer.innerHTML = '';
+            chainData.forEach(chain => {
+                const div = document.createElement('div');
+                div.className = 'chain-item';
+                div.innerHTML = `
+                    <p class="chain-label">${chain.chain}</p>
+                    <p class="chain-percent">${chain.burn}%</p>
+                    <div class="chain-bar">
+                        <div class="chain-bar-fill" style="width: ${chain.burn}%"></div>
+                    </div>
+                `;
+                chainBarsContainer.appendChild(div);
+            });
+        }
+
+        // Simulate new burn events every 5 seconds
+        setInterval(() => {
+            const tokens = [
+                { token: "SHIB", amount: (Math.floor(Math.random() * 3000000) + 1000000).toLocaleString(), chain: "Ethereum" },
+                { token: "ETH", amount: (Math.random() * 0.5 + 0.05).toFixed(2), chain: "Ethereum" },
+                { token: "PEPE", amount: (Math.floor(Math.random() * 10000000) + 1000000).toLocaleString(), chain: "Ethereum" },
+                { token: "PEPE", amount: (Math.floor(Math.random() * 10000000) + 1000000).toLocaleString(), chain: "Ethereum" }, // Extra PEPE
+                { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" },
+                { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" }, // Extra FLOKI
+                { token: "FLOKI", amount: (Math.floor(Math.random() * 8000000) + 1000000).toLocaleString(), chain: "BNB Chain" }, // Third FLOKI
+                { token: "BONK", amount: (Math.floor(Math.random() * 5000000) + 1000000).toLocaleString(), chain: "Solana" },
+                { token: "LUNC", amount: (Math.floor(Math.random() * 100000) + 5000).toLocaleString(), chain: "Terra" },
+                { token: "DOGE", amount: (Math.floor(Math.random() * 200000000) + 50000000).toLocaleString(), chain: "Dogecoin" },
+                { token: "AVAX", amount: (Math.floor(Math.random() * 100000) + 10000).toLocaleString(), chain: "Avalanche" },
+                { token: "MATIC", amount: (Math.floor(Math.random() * 500000) + 50000).toLocaleString(), chain: "Polygon" },
+                { token: "LUNA", amount: (Math.floor(Math.random() * 50000) + 1000).toLocaleString(), chain: "Terra 2.0" },
+                { token: "SOL", amount: (Math.random() * 5 + 0.1).toFixed(2), chain: "Solana" },
+                { token: "DOT", amount: (Math.floor(Math.random() * 10000) + 500).toLocaleString(), chain: "Polkadot" },
+                { token: "ADA", amount: (Math.floor(Math.random() * 50000) + 1000).toLocaleString(), chain: "Cardano" }
+            ];
+            
+            const token = tokens[Math.floor(Math.random() * tokens.length)];
+            const newEntry = {
+                token: token.token,
+                amount: token.amount,
+                chain: token.chain,
+                timestamp: Date.now()
+            };
+            
+            // Add new entry at top and keep only latest 15
+            liveFeed = [newEntry, ...liveFeed.slice(0, 14)];
+            renderLiveFeed();
+        }, 5000);
+
+        // Update stats occasionally
+        setInterval(() => {
+            // Simulate fluctuating values
+            const totalBurnedNum = parseFloat(stats.totalBurned.replace(/,/g, '')) + Math.floor(Math.random() * 100000) - 50000;
+            stats.totalBurned = totalBurnedNum.toLocaleString();
+            
+            const usdBurnedNum = parseFloat(stats.usdBurned.replace('$', '').replace(/,/g, '')) + (Math.random() * 10000 - 5000);
+            stats.usdBurned = `$${usdBurnedNum.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+            
+            totalBurnedEl.textContent = stats.totalBurned;
+            usdBurnedEl.textContent = stats.usdBurned;
+        }, 15000);
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initDisplay);
+    </script>
+</body>
+</html>

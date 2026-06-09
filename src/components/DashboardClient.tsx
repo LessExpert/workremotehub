@@ -50,8 +50,13 @@ export default function DashboardClient() {
       { token: "SOL", amount: "0.8", chain: "Solana", timestamp: Date.now() - 50 * 60 * 1000 }, // 50 minutes ago
       { token: "DOT", amount: "1,200", chain: "Polkadot", timestamp: Date.now() - 55 * 60 * 1000 }, // 55 minutes ago
       { token: "ADA", amount: "8,000", chain: "Cardano", timestamp: Date.now() - 60 * 60 * 1000 }, // 60 minutes ago
+      { token: "FLOKI", amount: "4,033,669", chain: "BNB Chain", timestamp: Date.now() - 65 * 60 * 1000 }, // 65 minutes ago - matching user example
+      { token: "FLOKI", amount: "2,593,406", chain: "BNB Chain", timestamp: Date.now() - 70 * 60 * 1000 }, // 70 minutes ago - matching user example
+      { token: "PEPE", amount: "7,117,192", chain: "Ethereum", timestamp: Date.now() - 75 * 60 * 1000 }, // 75 minutes ago - matching user example
+      { token: "SHIB", amount: "3,200,000", chain: "Ethereum", timestamp: Date.now() - 80 * 60 * 1000 }, // 80 minutes ago
+      { token: "BONK", amount: "1,800,000", chain: "Solana", timestamp: Date.now() - 85 * 60 * 1000 }, // 85 minutes ago
+      { token: "DOGE", amount: "750,000", chain: "Dogecoin", timestamp: Date.now() - 90 * 60 * 1000 } // 90 minutes ago
     ]);
-  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -74,7 +79,7 @@ export default function DashboardClient() {
           { token: "LUNA", amount: (Math.floor(Math.random() * 50000) + 1000).toLocaleString(), chain: "Terra 2.0" },
           { token: "SOL", amount: (Math.random() * 5 + 0.1).toFixed(2), chain: "Solana" },
           { token: "DOT", amount: (Math.floor(Math.random() * 10000) + 500).toLocaleString(), chain: "Polkadot" },
-          { token: "ADA", amount: (Math.floor(Math.random() * 50000) + 1000).toLocaleString(), chain: "Cardano" },
+          { token: "ADA", amount: (Math.floor(Math.random() * 50000) + 1000).toLocaleString(), chain: "Cardano" }
         ];
         const token = tokens[Math.floor(Math.random() * tokens.length)];
         const newEntry = {
@@ -101,28 +106,10 @@ export default function DashboardClient() {
           <StatCard title="Fastest Growing Token" value={stats.fastestToken} subtext="+110% peak burn rate variation" />
         </div>
 
-        <section className="bg-gray-900 rounded-xl p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Burn Rate Over Time</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={burnRateData}>
-              <defs>
-                <linearGradient id="burnGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#FF6B35" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#FF6B35" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <XAxis dataKey="name" stroke="#666" />
-              <YAxis stroke="#666" />
-              <Tooltip contentStyle={{ backgroundColor: "#111", border: "1px solid #333" }} />
-              <Area type="monotone" dataKey="burn" stroke="#FF6B35" fill="url(#burnGradient)" />
-            </AreaChart>
-          </ResponsiveContainer>
-        </section>
-
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
           <div className="bg-gray-900 rounded-xl p-4">
             <h2 className="text-lg font-semibold mb-2">Live Burn Feed (Updated)</h2>
-            <div className="h-[20rem] overflow-hidden text-sm text-gray-300 flex flex-col gap-1">
+            <div className="h-[20rem] overflow-y-auto text-sm text-gray-300 flex flex-col gap-1 live-feed-container">
               {liveFeed.map((item, index) => {
                 const timeAgo = Math.floor((Date.now() - item.timestamp) / 60000); // minutes ago
                 const timeText = timeAgo < 1 ? 'just now' : `${timeAgo} minute${timeAgo !== 1 ? 's' : ''} ago`;
@@ -133,6 +120,17 @@ export default function DashboardClient() {
                 );
               })}
             </div>
+            <style jsx>{`
+              .live-feed-container {
+                scroll-behavior: smooth;
+                scrollbar-width: thin; /* Firefox */
+                contain: content;      /* Performance isolation */
+              }
+              .live-feed-container p {
+                padding: 4px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05); /* Separator for clarity */
+              }
+            `}</style>
           </div>
           <div className="bg-gray-900 rounded-xl p-4">
             <h2 className="text-lg font-semibold mb-2">Top Burning Tokens</h2>
@@ -155,6 +153,24 @@ export default function DashboardClient() {
               </tbody>
             </table>
           </div>
+        </section>
+
+        <section className="bg-gray-900 rounded-xl p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4">Burn Rate Over Time</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={burnRateData}>
+              <defs>
+                <linearGradient id="burnGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#FF6B35" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="#FF6B35" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="name" stroke="#666" />
+              <YAxis stroke="#666" />
+              <Tooltip contentStyle={{ backgroundColor: "#111", border: "1px solid #333" }} />
+              <Area type="monotone" dataKey="burn" stroke="#FF6B35" fill="url(#burnGradient)" />
+            </AreaChart>
+          </ResponsiveContainer>
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
